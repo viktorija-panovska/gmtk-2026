@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://csc0smjp5ki0b"]
 
-[ext_resource type="Texture2D" uid="uid://c8jrrpiyfvtu2" path="res://drawing/drawable_texture.tres" id="1_00bwu"]
+[ext_resource type="Texture2D" uid="uid://c8jrrpiyfvtu2" path="res://drawing/textures/drawable_texture.tres" id="1_00bwu"]
 [ext_resource type="Script" uid="uid://bylqu44y5c28r" path="res://drawing/scripts/canvas.gd" id="2_k0s47"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_kyohr"]
