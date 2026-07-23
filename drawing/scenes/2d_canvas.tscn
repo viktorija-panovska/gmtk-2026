@@ -1,7 +1,6 @@
 [gd_scene format=3 uid="uid://n12t5sb631if"]
 
 [ext_resource type="Script" uid="uid://c1fwi47kh64eq" path="res://drawing/scripts/2D_canvas.gd" id="1_5lmgc"]
-[ext_resource type="Texture2D" uid="uid://w5kafc3luitw" path="res://icon.svg" id="2_gryyh"]
 [ext_resource type="Texture2D" uid="uid://cgvchcvgwev2u" path="res://drawing/textures/smooth_brush_shape.webp" id="3_gryyh"]
 [ext_resource type="Texture2D" uid="uid://c8jrrpiyfvtu2" path="res://drawing/textures/drawable_texture.tres" id="3_mm5nj"]
 [ext_resource type="Texture2D" uid="uid://eunhlm3j40c5" path="res://drawing/textures/black_spray_paint_can.png" id="4_afwnh"]
@@ -10,6 +9,7 @@
 [ext_resource type="Texture2D" uid="uid://jx8ylfqxijx1" path="res://drawing/textures/blue_spray_paint_can.png" id="6_f11qt"]
 [ext_resource type="Texture2D" uid="uid://cr2bnb631mcyt" path="res://drawing/textures/red_spray_paint_can_cursor.png" id="8_y0qqk"]
 [ext_resource type="Texture2D" uid="uid://c4cjvh8qoyiq7" path="res://drawing/textures/blue_spray_paint_can_cursor.png" id="9_4y31e"]
+[ext_resource type="PackedScene" uid="uid://dcql52mmn7msp" path="res://game_flow/scenes/phone.tscn" id="10_8ygry"]
 
 [node name="2D Canvas" type="Control" unique_id=2064535663]
 layout_mode = 3
@@ -52,31 +52,6 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Phone" type="TextureRect" parent="." unique_id=289829848]
-unique_name_in_owner = true
-visible = false
-self_modulate = Color(0, 0, 0, 1)
-layout_mode = 0
-offset_left = 974.0
-offset_top = 504.0
-offset_right = 1153.0
-offset_bottom = 798.0
-texture = ExtResource("2_gryyh")
-
-[node name="Reference" type="TextureRect" parent="Phone" unique_id=712160124]
-unique_name_in_owner = true
-layout_mode = 1
-anchors_preset = -1
-anchor_left = 0.095000006
-anchor_top = 0.031000001
-anchor_right = 0.92600006
-anchor_bottom = 0.45900002
-offset_left = -1.005022
-offset_top = -0.11399841
-offset_right = -0.57502747
-offset_bottom = 2.0540009
-texture = ExtResource("2_gryyh")
-
 [node name="ColorContainer" type="HBoxContainer" parent="." unique_id=326418370]
 unique_name_in_owner = true
 layout_mode = 1
@@ -88,3 +63,7 @@ offset_top = -59.0
 offset_bottom = 69.0
 grow_horizontal = 2
 grow_vertical = 0
+
+[node name="Phone" parent="." unique_id=175310537 instance=ExtResource("10_8ygry")]
+unique_name_in_owner = true
+layout_mode = 1
