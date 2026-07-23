@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://n12t5sb631if"]
 
 [ext_resource type="Script" uid="uid://c1fwi47kh64eq" path="res://drawing/scripts/2D_canvas.gd" id="1_5lmgc"]
+[ext_resource type="Texture2D" uid="uid://w5kafc3luitw" path="res://icon.svg" id="2_gryyh"]
 [ext_resource type="Texture2D" uid="uid://cgvchcvgwev2u" path="res://drawing/textures/smooth_brush_shape.webp" id="3_gryyh"]
 [ext_resource type="Texture2D" uid="uid://c8jrrpiyfvtu2" path="res://drawing/textures/drawable_texture.tres" id="3_mm5nj"]
 
@@ -13,9 +14,11 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_5lmgc")
 _drawable_texture = ExtResource("3_mm5nj")
-_brush = ExtResource("3_gryyh")
+_brush_texture = ExtResource("3_gryyh")
+_spray_can_texture = ExtResource("2_gryyh")
 
 [node name="DrawingTexture" type="TextureRect" parent="." unique_id=1789833365]
+unique_name_in_owner = true
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -23,3 +26,26 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("3_mm5nj")
+
+[node name="Stencil" type="TextureRect" parent="." unique_id=521882559]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 24.0
+offset_right = 24.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ColorContainer" type="HBoxContainer" parent="." unique_id=326418370]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -23.0
+offset_bottom = 105.0
+grow_horizontal = 2
+grow_vertical = 0
