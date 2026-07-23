@@ -1,0 +1,7 @@
+[gd_resource type="Resource" script_class="Mission" format=3 uid="uid://wj353y8ng5v"]
+
+[ext_resource type="Script" uid="uid://bka68top0jv34" path="res://game_flow/missions/mission.gd" id="1_fs7rk"]
+
+[resource]
+script = ExtResource("1_fs7rk")
+_time = 5.0
