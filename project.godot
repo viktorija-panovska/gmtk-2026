@@ -14,6 +14,10 @@ config/name="graffiti-game"
 config/features=PackedStringArray("4.7", "Forward Plus")
 config/icon="res://icon.svg"
 
+[autoload]
+
+Inventory="*uid://clxx754b1ako6"
+
 [file_customization]
 
 folder_colors={
