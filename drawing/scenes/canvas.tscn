@@ -1,0 +1,24 @@
+[gd_scene format=3 uid="uid://csc0smjp5ki0b"]
+
+[ext_resource type="Texture2D" uid="uid://c8jrrpiyfvtu2" path="res://drawing/textures/drawable_texture.tres" id="1_00bwu"]
+[ext_resource type="Script" uid="uid://bylqu44y5c28r" path="res://drawing/scripts/canvas.gd" id="2_k0s47"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_kyohr"]
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_o483p"]
+material = SubResource("StandardMaterial3D_kyohr")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_lxdrg"]
+albedo_texture = ExtResource("1_00bwu")
+
+[node name="Canvas" type="Node3D" unique_id=1898994545]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=233702109]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 1.0109389, 0)
+mesh = SubResource("PlaneMesh_o483p")
+surface_material_override/0 = SubResource("StandardMaterial3D_lxdrg")
+script = ExtResource("2_k0s47")
+drawable_texture = ExtResource("1_00bwu")
+
+[node name="Camera3D" type="Camera3D" parent="." unique_id=1558024315]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.2368506, 1.1409307)
