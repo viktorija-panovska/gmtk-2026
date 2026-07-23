@@ -1,7 +1,23 @@
 [gd_scene format=3 uid="uid://dcql52mmn7msp"]
 
-[ext_resource type="Texture2D" uid="uid://w5kafc3luitw" path="res://icon.svg" id="1_mvmhf"]
+[ext_resource type="Texture2D" uid="uid://w5kafc3luitw" path="res://utilities/icon.svg" id="1_mvmhf"]
 [ext_resource type="Script" uid="uid://dty544qrjfbbd" path="res://game_flow/scripts/phone.gd" id="2_17fpk"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_lxdrg"]
+bg_color = Color(1, 0, 0, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0, 0, 0, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[sub_resource type="LabelSettings" id="LabelSettings_ehc2p"]
+font_size = 15
+font_color = Color(0, 0, 0, 1)
 
 [node name="Phone" type="Control" unique_id=175310537]
 layout_mode = 3
@@ -10,6 +26,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 script = ExtResource("2_17fpk")
 
 [node name="FullView" type="TextureRect" parent="." unique_id=899559144]
@@ -20,6 +37,8 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+scale = Vector2(1e-05, 1e-05)
+pivot_offset = Vector2(1060, 600)
 
 [node name="PhoneObject" type="TextureRect" parent="." unique_id=1460604976]
 unique_name_in_owner = true
@@ -68,5 +87,28 @@ offset_right = 67.0
 offset_bottom = 23.0
 theme_override_colors/font_color = Color(1, 0, 0, 1)
 text = "00:00"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="PoliceWarning" type="Label" parent="PhoneObject" unique_id=874523878]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 0.30800003
+anchor_right = 0.5
+anchor_bottom = 0.30800003
+offset_left = -71.5
+offset_top = -25.55201
+offset_right = 72.5
+offset_bottom = 25.44799
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(1e-05, 1e-05)
+pivot_offset = Vector2(72, 25)
+theme_override_styles/normal = SubResource("StyleBoxFlat_lxdrg")
+text = "WARNING!
+POLICE INCOMING"
+label_settings = SubResource("LabelSettings_ehc2p")
 horizontal_alignment = 1
 vertical_alignment = 1

@@ -65,8 +65,6 @@ func _finalize_painting() -> Image:
 		mask.convert(Image.FORMAT_RGBA8)
 		final.blend_rect(mask, Rect2(Vector2(0, 0), mask.get_size()), Vector2(0, 0))
 
-	# TODO: Remove before shipping, for testing only (can't save pictures on web)
-	final.save_png("graffiti.png")
 	return final
 
 #endregion

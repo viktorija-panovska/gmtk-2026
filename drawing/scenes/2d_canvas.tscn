@@ -10,6 +10,7 @@
 [ext_resource type="Texture2D" uid="uid://cr2bnb631mcyt" path="res://drawing/textures/red_spray_paint_can_cursor.png" id="8_y0qqk"]
 [ext_resource type="Texture2D" uid="uid://c4cjvh8qoyiq7" path="res://drawing/textures/blue_spray_paint_can_cursor.png" id="9_4y31e"]
 [ext_resource type="PackedScene" uid="uid://dcql52mmn7msp" path="res://game_flow/scenes/phone.tscn" id="10_8ygry"]
+[ext_resource type="Texture2D" uid="uid://i003ypde4eqr" path="res://drawing/textures/stencil_test.png" id="10_y0qqk"]
 
 [node name="2D Canvas" type="Control" unique_id=2064535663]
 layout_mode = 3
@@ -51,6 +52,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+texture = ExtResource("10_y0qqk")
 
 [node name="ColorContainer" type="HBoxContainer" parent="." unique_id=326418370]
 unique_name_in_owner = true
