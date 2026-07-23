@@ -1,3 +1,11 @@
-63f7b34db8d8cdea90c76aacccf841ec
-::res://::1784745342
-icon.svg::CompressedTexture2D::1606693329580217484::1784745228::1784745306::1::::<><><>0<>0<>7e388ca3978683749d903033ac5d5ee0<>res://.godot/imported/icon.svg-218a8f2b3041327d8a5756f3a245f83b.ctex::
+78098b89c88a74ebe8c20117b8754620
+::res://::1784793000
+icon.svg::CompressedTexture2D::1606693329580217484::1784745228::1784788692::1::::<><><>0<>0<>fe0d572f8ec298c3c51cd7f8600bd997<>res://.godot/imported/icon.svg-218a8f2b3041327d8a5756f3a245f83b.s3tc.ctex::
+::res://drawing/::1784793000
+drawable_texture.tres::DrawableTexture2D::7108715955907889287::1784790228::0::1::::<><><>0<>0<><>::
+::res://drawing/scenes/::1784747511
+canvas.tscn::PackedScene::6041920022393820355::1784792863::0::1::::<><><>0<>0<><>::uid://c8jrrpiyfvtu2::::res://drawing/drawable_texture.tres<>uid://bylqu44y5c28r::::res://drawing/scripts/canvas.gd
+::res://drawing/scripts/::1784792981
+canvas.gd::GDScript::4094669843170030607::1784792973::0::1::::<>VisualInstance3D<><>0<>0<><>::
+::res://npcs/::1784787932
+::res://npcs/cops/::1784754907
