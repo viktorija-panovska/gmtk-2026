@@ -1,24 +1,25 @@
 extends Node
 
-@export var _debug: bool
-@export var _default_color: Color = Color.BLACK
+const DEFAULT_COLOR: Color = Color.BLACK
 
 var _money: int
 var _available_colors: Array[Color]
 var _available_stencil: Texture2D
+var _reference_image: Texture2D
 
 
 func _ready() -> void:
-    _available_colors.append(_default_color)
-    if _debug:
-        _available_colors.append(Color.RED)
-        _available_colors.append(Color.BLUE)
+    _available_colors.append(DEFAULT_COLOR)
+    _available_colors.append(Color.RED)
+    _available_colors.append(Color.BLUE)
 
 
 # Called at end of mission to clear out all items
-func clear() -> void:
+func clear_items() -> void:
     _available_colors.clear()
-    _available_colors.append(_default_color)
+    _available_colors.append(DEFAULT_COLOR)
+    _available_stencil = null
+    _reference_image = null
 
 
 func get_available_colors() -> Array[Color]:
@@ -51,3 +52,7 @@ func gain_money(amount: int) -> void:
 
 func spend_money(amount: int) -> void:
     _money -= amount
+
+
+func get_reference_image() -> Texture2D:
+    return _reference_image
