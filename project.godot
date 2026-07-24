@@ -24,7 +24,7 @@ GameManager="*uid://dgh5scrne2ski"
 folder_colors={
 "res://drawing/": "pink",
 "res://game_flow/": "green",
-"res://shop/": "yellow",
+"res://prep/": "yellow",
 "res://utilities/": "gray"
 }
 
