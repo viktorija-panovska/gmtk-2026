@@ -10,13 +10,29 @@ bg_color = Color(0.40243423, 0.668814, 0.50768906, 1)
 font_size = 40
 font_color = Color(0, 0, 0, 1)
 
-[sub_resource type="LabelSettings" id="LabelSettings_kyohr"]
+[sub_resource type="LabelSettings" id="LabelSettings_co1e6"]
 font_size = 35
+font_color = Color(0, 0, 1, 1)
+outline_color = Color(1, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_cott1"]
+font_size = 35
+font_color = Color(1, 0, 0, 1)
+outline_color = Color(1, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_kyohr"]
+font_size = 30
 font_color = Color(0, 0, 0, 1)
 
 [sub_resource type="LabelSettings" id="LabelSettings_6tiwt"]
-font_size = 58
+font_size = 50
 font_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_co1e6"]
+bg_color = Color(1, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_cott1"]
+bg_color = Color(0.5885512, 0.6078444, 0.59083146, 1)
 
 [sub_resource type="LabelSettings" id="LabelSettings_c5xc1"]
 font_size = 45
@@ -64,6 +80,7 @@ grow_vertical = 2
 
 [node name="MissionList" type="VBoxContainer" parent="Phone/BG" unique_id=1607021880]
 unique_name_in_owner = true
+visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -168,6 +185,7 @@ vertical_alignment = 1
 text_overrun_behavior = 5
 
 [node name="MissionDetail" type="Control" parent="Phone/BG" unique_id=678964532]
+unique_name_in_owner = true
 visible = false
 layout_mode = 1
 anchors_preset = 15
@@ -176,21 +194,56 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
+[node name="MissionReward" type="Label" parent="Phone/BG/MissionDetail" unique_id=1832945617]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 10.0
+offset_top = -56.92627
+offset_right = 217.0
+offset_bottom = -7.9262695
+grow_vertical = 0
+text = "Reward: $50"
+label_settings = SubResource("LabelSettings_co1e6")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="MissionTime" type="Label" parent="Phone/BG/MissionDetail" unique_id=726130268]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 280.0
+offset_top = -56.92627
+offset_right = 487.0
+offset_bottom = -7.9262695
+grow_vertical = 0
+text = "Time: 00:00"
+label_settings = SubResource("LabelSettings_cott1")
+horizontal_alignment = 1
+vertical_alignment = 1
+
 [node name="MissionDescription" type="Label" parent="Phone/BG/MissionDetail" unique_id=2112051094]
 unique_name_in_owner = true
-custom_minimum_size = Vector2(455, 425)
-custom_maximum_size = Vector2(455, 425)
+custom_minimum_size = Vector2(474, 394)
+custom_maximum_size = Vector2(474, 394)
 layout_mode = 1
 anchors_preset = -1
-anchor_left = 0.28100002
-anchor_top = 0.544
-anchor_right = 0.28100002
-anchor_bottom = 0.544
-offset_left = -227.29823
-offset_top = -212.34525
-offset_right = 227.70175
-offset_bottom = 212.65475
-text = "Hello I need someone to draw this for me on this place."
+anchor_left = 0.28
+anchor_top = 0.5
+anchor_right = 0.28
+anchor_bottom = 0.5
+offset_left = -237.39948
+offset_top = -197.16046
+offset_right = 236.60051
+offset_bottom = 196.83954
+text = "Lorem ipsum dolor sit
+Lauren epsum solo shit
+Dougus dippus deltoid dump
+Crampus kringus forest gump"
 label_settings = SubResource("LabelSettings_kyohr")
 autowrap_mode = 3
 
@@ -198,28 +251,28 @@ autowrap_mode = 3
 unique_name_in_owner = true
 layout_mode = 1
 anchors_preset = -1
-anchor_left = 0.757
-anchor_top = 0.37300003
-anchor_right = 0.757
-anchor_bottom = 0.37300003
-offset_left = -175.09894
-offset_top = -175.24084
-offset_right = 175.90106
-offset_bottom = 175.75916
+anchor_left = 0.76000005
+anchor_top = 0.38900003
+anchor_right = 0.76000005
+anchor_bottom = 0.38900003
+offset_left = -175.79517
+offset_top = -175.67166
+offset_right = 175.20483
+offset_bottom = 175.32834
 texture = ExtResource("1_8ci6e")
 
 [node name="AcceptButton" type="Button" parent="Phone/BG/MissionDetail" unique_id=200810367]
 unique_name_in_owner = true
 layout_mode = 1
 anchors_preset = -1
-anchor_left = 0.76100004
-anchor_top = 0.851
-anchor_right = 0.76100004
-anchor_bottom = 0.851
-offset_left = -123.69391
-offset_top = -60.111603
-offset_right = 123.30609
-offset_bottom = 59.888397
+anchor_left = 0.76000005
+anchor_top = 0.86
+anchor_right = 0.76000005
+anchor_bottom = 0.86
+offset_left = -110.795166
+offset_top = -48.853912
+offset_right = 111.204834
+offset_bottom = 49.146088
 size_flags_vertical = 3
 theme_override_styles/hover = SubResource("StyleBoxFlat_o483p")
 
@@ -244,7 +297,8 @@ offset_top = 6.3026657
 offset_right = 65.496
 offset_bottom = 59.60533
 size_flags_vertical = 3
-theme_override_styles/hover = SubResource("StyleBoxFlat_o483p")
+theme_override_styles/normal = SubResource("StyleBoxFlat_co1e6")
+theme_override_styles/hover = SubResource("StyleBoxFlat_cott1")
 
 [node name="BackText" type="Label" parent="Phone/BG/MissionDetail/BackButton" unique_id=580515517]
 layout_mode = 1
