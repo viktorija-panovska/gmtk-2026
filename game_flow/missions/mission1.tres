@@ -9,3 +9,5 @@ _time_in_seconds = 120
 _reward = 50
 _reference_image = ExtResource("1_3s4yx")
 _description = "Helloooo"
+_police_countdown_seconds = 30
+_stencil = ExtResource("1_3s4yx")

@@ -18,6 +18,7 @@ config/icon="res://utilities/icon.svg"
 
 Inventory="*uid://clxx754b1ako6"
 GameManager="*uid://dgh5scrne2ski"
+SceneLoader="*uid://ba034yt0jm0x1"
 
 [file_customization]
 

@@ -15,9 +15,6 @@ var _current_mission: Mission
 var _current_mission_idx: int
 var _has_mission_started: bool
 
-@onready var _reference_image: Texture2D = preload("res://utilities/icon.svg")
-@onready var _stencil: Texture2D = preload("res://utilities/icon.svg")
-
 
 func _ready() -> void:
 	for resource in ResourceLoader.list_directory("res://game_flow/missions/"):
@@ -30,7 +27,6 @@ func _process(delta: float) -> void:
 
 	_mission_countdown = max(_mission_countdown - delta, 0)
 	_police_countdown = _police_countdown + delta if _should_refresh_police_countdown else max(_police_countdown - delta, 0)
-	print(_mission_countdown)
 
 	if _police_countdown == 0 and not _is_police_arrived_emitted:
 		_is_police_arrived_emitted = true
@@ -73,19 +69,20 @@ func get_mission(idx: int) -> Mission:
 
 
 func get_reference_image() -> Texture2D:
-	return _reference_image
+	return _current_mission.get_reference_image()
 
 
 func get_stencil() -> Texture2D:
-	return _stencil
+	return _current_mission.get_stencil()
 
 
-func start_mission(idx: int) -> void:
+func accept_mission(idx: int) -> void:
 	_current_mission = _missions[idx]
 	_current_mission_idx = idx
+	SceneLoader.load_scene(Constants.SCENE_UID_SHOP)
 
-	print("STARTING MISSION")
 
+func start_mission() -> void:
 	_mission_countdown = _current_mission.get_time_in_seconds()
 	_police_countdown = _current_mission.get_police_countdown_seconds()
 	_police_incoming_alert_seconds = _police_countdown / 2

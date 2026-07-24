@@ -1,0 +1,82 @@
+[gd_scene format=3 uid="uid://b81bweisx7gvg"]
+
+[ext_resource type="Script" uid="uid://dkh3f6bcafli8" path="res://game_flow/scripts/main_menu.gd" id="1_b6n8f"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_o483p"]
+font_size = 50
+
+[node name="MainMenu" type="Control" unique_id=1003388130]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_b6n8f")
+
+[node name="BG" type="ColorRect" parent="." unique_id=2007744888]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.36078432, 0.32941177, 0.14509805, 1)
+
+[node name="StartButton" type="Button" parent="." unique_id=18021936]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -144.0
+offset_top = 8.0
+offset_right = 170.0
+offset_bottom = 92.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(157, 42)
+flat = true
+
+[node name="Label" type="Label" parent="StartButton" unique_id=345125699]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "START GAME"
+label_settings = SubResource("LabelSettings_o483p")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="QuitButton" type="Button" parent="." unique_id=551636472]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -144.0
+offset_top = 103.0
+offset_right = 170.0
+offset_bottom = 188.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(157, 42)
+flat = true
+
+[node name="Label" type="Label" parent="QuitButton" unique_id=942671656]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "QUIT"
+label_settings = SubResource("LabelSettings_o483p")
+horizontal_alignment = 1
+vertical_alignment = 1

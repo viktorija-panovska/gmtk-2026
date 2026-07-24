@@ -63,4 +63,4 @@ func _close_mission_detail() -> void:
 
 
 func _accept_mission() -> void:
-	GameManager.start_mission(_selected_mission_idx)
+	GameManager.accept_mission(_selected_mission_idx)
