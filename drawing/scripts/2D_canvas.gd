@@ -1,7 +1,5 @@
 extends Control
 
-const INVALID_COLOR: Color = Color(-1, -1, -1, 0)
-
 @export var _drawable_texture: DrawableTexture2D
 @export var _brush_texture: Texture2D
 @export var _color: Color = Color.BLACK
@@ -10,7 +8,7 @@ const INVALID_COLOR: Color = Color(-1, -1, -1, 0)
 @export var _spray_can_textures: Dictionary[Color, Texture2D]
 @export var _cursor_textures: Dictionary[Color, Texture2D]
 
-var _hovered_color: Color = INVALID_COLOR
+var _hovered_color: Color = Inventory.INVALID_COLOR
 var _hovered_spray_can: Control
 var _spray_can_tweens: Dictionary[Color, Tween]
 
@@ -34,7 +32,7 @@ func _process(_delta: float) -> void:
 		return
 
 	if Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT):
-		if _is_color_hovered():
+		if _hovered_color != Inventory.INVALID_COLOR:
 			_set_active_color(_hovered_color)
 		else:
 			_paint()
@@ -75,7 +73,7 @@ func _finalize_painting() -> Image:
 func _fill_colors() -> void:
 	for color in Inventory.get_available_colors():
 		var item = TextureRect.new()
-		item.texture = _spray_can_textures[color] if color in _spray_can_textures.keys() else _default_spray_can_texture
+		item.texture = _spray_can_textures[color] if color in _spray_can_textures else _default_spray_can_texture
 		item.expand_mode = TextureRect.EXPAND_FIT_WIDTH_PROPORTIONAL
 		item.mouse_entered.connect(func(): _set_hovered_color(color, item))
 		item.mouse_exited.connect(_clear_hovered_color)
@@ -85,10 +83,6 @@ func _fill_colors() -> void:
 func _clear_colors() -> void:
 	for child in _color_container.get_children():
 		_color_container.remove_child(child)
-
-
-func _is_color_hovered() -> bool:
-	return _hovered_color != INVALID_COLOR
 
 
 func _set_hovered_color(color: Color, spray_can: Control) -> void:
@@ -112,7 +106,7 @@ func _clear_hovered_color() -> void:
 	_spray_can_tweens[_hovered_color] = create_tween()
 	_spray_can_tweens[_hovered_color].tween_property(_hovered_spray_can, "position:y", 0, 0.2)
 
-	_hovered_color = INVALID_COLOR
+	_hovered_color = Inventory.INVALID_COLOR
 	_hovered_spray_can = null
 
 
