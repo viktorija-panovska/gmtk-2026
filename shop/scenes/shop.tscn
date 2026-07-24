@@ -1,0 +1,226 @@
+[gd_scene format=3 uid="uid://clhjdla0xnl8r"]
+
+[ext_resource type="Script" uid="uid://nv4cef8bilhl" path="res://shop/scripts/shop.gd" id="1_yxnod"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_7oafl"]
+albedo_color = Color(0.7526577, 0.54955876, 0.6882652, 1)
+
+[sub_resource type="QuadMesh" id="QuadMesh_o483p"]
+material = SubResource("StandardMaterial3D_7oafl")
+size = Vector2(3, 3)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_yxnod"]
+albedo_color = Color(0.30416793, 0.023889972, 2.815649e-06, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_kyohr"]
+material = SubResource("StandardMaterial3D_yxnod")
+size = Vector3(3, 0.5, 0.5)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_o483p"]
+top_radius = 0.1
+bottom_radius = 0.1
+height = 0.35
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_o483p"]
+albedo_color = Color(1, 0, 0, 1)
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_o483p"]
+height = 0.35
+radius = 0.1
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_kyohr"]
+albedo_color = Color(0, 0, 1, 1)
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_7oafl"]
+size = Vector2(0.8, 0.8)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_lxdrg"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_yxnod"]
+size = Vector3(0.8, 0.8, 0.2)
+
+[sub_resource type="LabelSettings" id="LabelSettings_yxnod"]
+font_size = 30
+
+[sub_resource type="LabelSettings" id="LabelSettings_o483p"]
+font_size = 30
+font_color = Color(0, 0, 0, 1)
+
+[node name="Shop" type="Node3D" unique_id=972570901]
+script = ExtResource("1_yxnod")
+_stencil_price = 50
+_color_prices = Dictionary[Color, int]({
+Color(1, 0, 0, 1): 20,
+Color(0, 0, 1, 1): 20
+})
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=1612000314]
+light_color = Color(0.99489874, 0.86262155, 0.7061562, 1)
+sky_mode = 1
+
+[node name="Camera3D" type="Camera3D" parent="." unique_id=843881179]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.47453398, 0.66929257)
+fov = 62.3
+
+[node name="Room" type="Node3D" parent="." unique_id=1082015971]
+
+[node name="Wall_Back" type="MeshInstance3D" parent="Room" unique_id=1526022508]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, -1.4221772)
+mesh = SubResource("QuadMesh_o483p")
+
+[node name="Wall_Left" type="MeshInstance3D" parent="Room" unique_id=151026292]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -1.5, 0.5, -0.118264794)
+mesh = SubResource("QuadMesh_o483p")
+
+[node name="Wall_Right" type="MeshInstance3D" parent="Room" unique_id=436824079]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 1.5, 0.414, -0.118264794)
+mesh = SubResource("QuadMesh_o483p")
+
+[node name="Counter" type="MeshInstance3D" parent="Room" unique_id=1028342730]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.2986865, -0.7154968)
+mesh = SubResource("BoxMesh_kyohr")
+
+[node name="PaintCans" type="Node3D" parent="." unique_id=2055196002]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.13161337, 0)
+
+[node name="RedPaintCan" type="StaticBody3D" parent="PaintCans" unique_id=2048597205]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.9, 0, -0.706)
+
+[node name="Mesh" type="MeshInstance3D" parent="PaintCans/RedPaintCan" unique_id=506905526]
+mesh = SubResource("CylinderMesh_o483p")
+surface_material_override/0 = SubResource("StandardMaterial3D_o483p")
+
+[node name="Collider" type="CollisionShape3D" parent="PaintCans/RedPaintCan" unique_id=1281906175]
+shape = SubResource("CylinderShape3D_o483p")
+
+[node name="BluePaintCan" type="StaticBody3D" parent="PaintCans" unique_id=1893765562]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.584, 0, -0.706)
+
+[node name="Mesh" type="MeshInstance3D" parent="PaintCans/BluePaintCan" unique_id=856797476]
+mesh = SubResource("CylinderMesh_o483p")
+surface_material_override/0 = SubResource("StandardMaterial3D_kyohr")
+
+[node name="Collider" type="CollisionShape3D" parent="PaintCans/BluePaintCan" unique_id=877663906]
+shape = SubResource("CylinderShape3D_o483p")
+
+[node name="Stencil" type="StaticBody3D" parent="." unique_id=57230166]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.60289073, 1.1539955, -1.4177246)
+
+[node name="StencilMesh" type="MeshInstance3D" parent="Stencil" unique_id=1440972938]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, 0)
+mesh = SubResource("PlaneMesh_7oafl")
+surface_material_override/0 = SubResource("StandardMaterial3D_lxdrg")
+
+[node name="Collider" type="CollisionShape3D" parent="Stencil" unique_id=958984205]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.08694458)
+shape = SubResource("BoxShape3D_yxnod")
+
+[node name="UI" type="Control" parent="." unique_id=440737250]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="Money" type="Label" parent="UI" unique_id=987698599]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -217.0
+offset_top = -62.0
+offset_right = -13.0
+offset_bottom = -20.0
+grow_horizontal = 0
+grow_vertical = 0
+text = "BUDGET: $0"
+label_settings = SubResource("LabelSettings_yxnod")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="RedPriceTag" type="ColorRect" parent="UI" unique_id=492257509]
+layout_mode = 0
+offset_left = 184.0
+offset_top = 581.0
+offset_right = 244.0
+offset_bottom = 621.0
+
+[node name="RedPrice" type="Label" parent="UI/RedPriceTag" unique_id=38094823]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -21.0
+offset_right = 20.0
+offset_bottom = 21.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "$15"
+label_settings = SubResource("LabelSettings_o483p")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="BluePriceTag" type="ColorRect" parent="UI" unique_id=269981342]
+layout_mode = 0
+offset_left = 315.0
+offset_top = 581.0
+offset_right = 375.0
+offset_bottom = 621.0
+
+[node name="BluePrice" type="Label" parent="UI/BluePriceTag" unique_id=1983640554]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -21.0
+offset_right = 20.0
+offset_bottom = 21.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "$15"
+label_settings = SubResource("LabelSettings_o483p")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="StencilPriceTag" type="ColorRect" parent="UI" unique_id=1170040481]
+layout_mode = 0
+offset_left = 387.0
+offset_top = 262.0
+offset_right = 447.0
+offset_bottom = 302.0
+
+[node name="StencilPrice" type="Label" parent="UI/StencilPriceTag" unique_id=888618163]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -21.0
+offset_right = 20.0
+offset_bottom = 21.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "$15"
+label_settings = SubResource("LabelSettings_o483p")
+horizontal_alignment = 1
+vertical_alignment = 1

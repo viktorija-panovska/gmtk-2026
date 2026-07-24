@@ -1,11 +1,11 @@
 extends Node
 
 const DEFAULT_COLOR: Color = Color.BLACK
+const INVALID_COLOR: Color = Color(-1, -1, -1, 0)
 
-var _money: int
+var _money: int = 50
 var _available_colors: Array[Color]
 var _available_stencil: Texture2D
-var _reference_image: Texture2D
 
 
 func _ready() -> void:
@@ -19,7 +19,6 @@ func clear_items() -> void:
     _available_colors.clear()
     _available_colors.append(DEFAULT_COLOR)
     _available_stencil = null
-    _reference_image = null
 
 
 func get_available_colors() -> Array[Color]:
@@ -54,5 +53,5 @@ func spend_money(amount: int) -> void:
     _money -= amount
 
 
-func get_reference_image() -> Texture2D:
-    return _reference_image
+func has_enough_money(price: int) -> bool:
+    return _money - price >= 0
