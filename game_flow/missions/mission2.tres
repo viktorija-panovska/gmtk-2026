@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="Mission" format=3 uid="uid://b5wyfh2tutk0s"]
+
+[ext_resource type="Texture2D" uid="uid://w5kafc3luitw" path="res://utilities/icon.svg" id="1_3chqq"]
+[ext_resource type="Script" uid="uid://bka68top0jv34" path="res://game_flow/scripts/mission.gd" id="2_2jwaj"]
+
+[resource]
+script = ExtResource("2_2jwaj")
+_time_in_seconds = 60
+_reward = 100
+_reference_image = ExtResource("1_3chqq")
+_description = "AAAAAAAAAAAAA"
+_police_countdown_seconds = 50
+_stencil = ExtResource("1_3chqq")

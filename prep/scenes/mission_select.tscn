@@ -1,0 +1,314 @@
+[gd_scene format=3 uid="uid://dc5c1g8mjups0"]
+
+[ext_resource type="Texture2D" uid="uid://w5kafc3luitw" path="res://utilities/icon.svg" id="1_8ci6e"]
+[ext_resource type="Script" uid="uid://doc40pd7dct1k" path="res://prep/scripts/mission_select.gd" id="1_co1e6"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_o483p"]
+bg_color = Color(0.40243423, 0.668814, 0.50768906, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_o483p"]
+font_size = 40
+font_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_co1e6"]
+font_size = 35
+font_color = Color(0, 0, 1, 1)
+outline_color = Color(1, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_cott1"]
+font_size = 35
+font_color = Color(1, 0, 0, 1)
+outline_color = Color(1, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_kyohr"]
+font_size = 30
+font_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_6tiwt"]
+font_size = 50
+font_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_co1e6"]
+bg_color = Color(1, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_cott1"]
+bg_color = Color(0.5885512, 0.6078444, 0.59083146, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_c5xc1"]
+font_size = 45
+font_color = Color(0, 0, 0, 1)
+
+[node name="MissionSelect" type="Control" unique_id=1907107381]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_co1e6")
+
+[node name="Phone" type="TextureRect" parent="." unique_id=1460604976]
+unique_name_in_owner = true
+self_modulate = Color(0, 0, 0, 1)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 35.0
+offset_top = 33.0
+offset_right = -36.0
+offset_bottom = 611.44714
+grow_horizontal = 2
+grow_vertical = 2
+offset_transform_enabled = true
+texture = ExtResource("1_8ci6e")
+
+[node name="BG" type="ColorRect" parent="Phone" unique_id=1437784837]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.08800001
+anchor_top = 0.041
+anchor_right = 0.919
+anchor_bottom = 0.47100002
+offset_left = -0.37600708
+offset_top = 0.4129982
+offset_right = 0.053955078
+offset_bottom = -0.03302002
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MissionList" type="VBoxContainer" parent="Phone/BG" unique_id=1607021880]
+unique_name_in_owner = true
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MissionButton" type="Button" parent="Phone/BG/MissionList" unique_id=1900954173]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_styles/hover = SubResource("StyleBoxFlat_o483p")
+
+[node name="MissionTitle" type="Label" parent="Phone/BG/MissionList/MissionButton" unique_id=1866156948]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+label_settings = SubResource("LabelSettings_o483p")
+vertical_alignment = 1
+text_overrun_behavior = 5
+
+[node name="MissionButton2" type="Button" parent="Phone/BG/MissionList" unique_id=1370365598]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_styles/hover = SubResource("StyleBoxFlat_o483p")
+
+[node name="MissionTitle2" type="Label" parent="Phone/BG/MissionList/MissionButton2" unique_id=357502176]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+label_settings = SubResource("LabelSettings_o483p")
+vertical_alignment = 1
+text_overrun_behavior = 5
+
+[node name="MissionButton3" type="Button" parent="Phone/BG/MissionList" unique_id=1772434575]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_styles/hover = SubResource("StyleBoxFlat_o483p")
+
+[node name="MissionTitle3" type="Label" parent="Phone/BG/MissionList/MissionButton3" unique_id=1167657247]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+label_settings = SubResource("LabelSettings_o483p")
+vertical_alignment = 1
+text_overrun_behavior = 5
+
+[node name="MissionButton4" type="Button" parent="Phone/BG/MissionList" unique_id=1076774063]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_styles/hover = SubResource("StyleBoxFlat_o483p")
+
+[node name="MissionTitle4" type="Label" parent="Phone/BG/MissionList/MissionButton4" unique_id=905945245]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+label_settings = SubResource("LabelSettings_o483p")
+vertical_alignment = 1
+text_overrun_behavior = 5
+
+[node name="MissionButton5" type="Button" parent="Phone/BG/MissionList" unique_id=2067876048]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_styles/hover = SubResource("StyleBoxFlat_o483p")
+
+[node name="MissionTitle5" type="Label" parent="Phone/BG/MissionList/MissionButton5" unique_id=1991471124]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+label_settings = SubResource("LabelSettings_o483p")
+vertical_alignment = 1
+text_overrun_behavior = 5
+
+[node name="MissionButton6" type="Button" parent="Phone/BG/MissionList" unique_id=151046465]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_styles/hover = SubResource("StyleBoxFlat_o483p")
+
+[node name="MissionTitle6" type="Label" parent="Phone/BG/MissionList/MissionButton6" unique_id=1407102058]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+label_settings = SubResource("LabelSettings_o483p")
+vertical_alignment = 1
+text_overrun_behavior = 5
+
+[node name="MissionDetail" type="Control" parent="Phone/BG" unique_id=678964532]
+unique_name_in_owner = true
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MissionReward" type="Label" parent="Phone/BG/MissionDetail" unique_id=1832945617]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 10.0
+offset_top = -56.92627
+offset_right = 217.0
+offset_bottom = -7.9262695
+grow_vertical = 0
+text = "Reward: $50"
+label_settings = SubResource("LabelSettings_co1e6")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="MissionTime" type="Label" parent="Phone/BG/MissionDetail" unique_id=726130268]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 280.0
+offset_top = -56.92627
+offset_right = 487.0
+offset_bottom = -7.9262695
+grow_vertical = 0
+text = "Time: 00:00"
+label_settings = SubResource("LabelSettings_cott1")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="MissionDescription" type="Label" parent="Phone/BG/MissionDetail" unique_id=2112051094]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(474, 394)
+custom_maximum_size = Vector2(474, 394)
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.28
+anchor_top = 0.5
+anchor_right = 0.28
+anchor_bottom = 0.5
+offset_left = -237.39948
+offset_top = -197.16046
+offset_right = 236.60051
+offset_bottom = 196.83954
+text = "Lorem ipsum dolor sit
+Lauren epsum solo shit
+Dougus dippus deltoid dump
+Crampus kringus forest gump"
+label_settings = SubResource("LabelSettings_kyohr")
+autowrap_mode = 3
+
+[node name="ReferenceImage" type="TextureRect" parent="Phone/BG/MissionDetail" unique_id=948947461]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.76000005
+anchor_top = 0.38900003
+anchor_right = 0.76000005
+anchor_bottom = 0.38900003
+offset_left = -175.79517
+offset_top = -175.67166
+offset_right = 175.20483
+offset_bottom = 175.32834
+texture = ExtResource("1_8ci6e")
+
+[node name="AcceptButton" type="Button" parent="Phone/BG/MissionDetail" unique_id=200810367]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.76000005
+anchor_top = 0.86
+anchor_right = 0.76000005
+anchor_bottom = 0.86
+offset_left = -110.795166
+offset_top = -48.853912
+offset_right = 111.204834
+offset_bottom = 49.146088
+size_flags_vertical = 3
+theme_override_styles/hover = SubResource("StyleBoxFlat_o483p")
+
+[node name="AcceptText" type="Label" parent="Phone/BG/MissionDetail/AcceptButton" unique_id=152769792]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "ACCEPT"
+label_settings = SubResource("LabelSettings_6tiwt")
+horizontal_alignment = 1
+vertical_alignment = 1
+text_overrun_behavior = 5
+
+[node name="BackButton" type="Button" parent="Phone/BG/MissionDetail" unique_id=1603247980]
+unique_name_in_owner = true
+layout_mode = 1
+offset_left = 7.248001
+offset_top = 6.3026657
+offset_right = 65.496
+offset_bottom = 59.60533
+size_flags_vertical = 3
+theme_override_styles/normal = SubResource("StyleBoxFlat_co1e6")
+theme_override_styles/hover = SubResource("StyleBoxFlat_cott1")
+
+[node name="BackText" type="Label" parent="Phone/BG/MissionDetail/BackButton" unique_id=580515517]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "X"
+label_settings = SubResource("LabelSettings_c5xc1")
+horizontal_alignment = 1
+vertical_alignment = 1
+text_overrun_behavior = 5

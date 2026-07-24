@@ -1,7 +1,13 @@
 [gd_resource type="Resource" script_class="Mission" format=3 uid="uid://wj353y8ng5v"]
 
-[ext_resource type="Script" uid="uid://bka68top0jv34" path="res://game_flow/missions/mission.gd" id="1_fs7rk"]
+[ext_resource type="Texture2D" uid="uid://w5kafc3luitw" path="res://utilities/icon.svg" id="1_3s4yx"]
+[ext_resource type="Script" uid="uid://bka68top0jv34" path="res://game_flow/scripts/mission.gd" id="1_fs7rk"]
 
 [resource]
 script = ExtResource("1_fs7rk")
-_time = 5.0
+_time_in_seconds = 120
+_reward = 50
+_reference_image = ExtResource("1_3s4yx")
+_description = "Helloooo"
+_police_countdown_seconds = 30
+_stencil = ExtResource("1_3s4yx")
