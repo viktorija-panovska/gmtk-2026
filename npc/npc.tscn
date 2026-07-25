@@ -1,0 +1,37 @@
+[gd_scene format=3 uid="uid://c0cpoca7xppi"]
+
+[ext_resource type="Script" uid="uid://bs5djtghpcoul" path="res://npc/npc.gd" id="1_ideak"]
+[ext_resource type="Script" uid="uid://cmgcelj1qxg8o" path="res://addons/tattomoosa.vision_cone_3d/src/VisionCone3D.gd" id="2_xxcha"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_xxcha"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_kh24r"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_ul7y6"]
+
+[node name="NPC" type="CharacterBody3D" unique_id=125180639]
+script = ExtResource("1_ideak")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1964188466]
+mesh = SubResource("CapsuleMesh_xxcha")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1788591569]
+shape = SubResource("CapsuleShape3D_kh24r")
+
+[node name="NavigationAgent3D" type="NavigationAgent3D" parent="." unique_id=2008744131]
+target_desired_distance = 1.5
+debug_enabled = true
+
+[node name="VisionCone3D" type="Area3D" parent="." unique_id=675379958 node_paths=PackedStringArray("vision_test_ignore_bodies")]
+collision_mask = 2
+script = ExtResource("2_xxcha")
+debug_draw = true
+vision_test_ignore_bodies = [NodePath("..")]
+collision_mask_ = 2
+metadata/_custom_type_script = "uid://cmgcelj1qxg8o"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="VisionCone3D" unique_id=1327868594]
+transform = Transform3D(40, 0, 0, 0, 40, 0, 0, 0, 40, 0, 0, 0)
+shape = SubResource("SphereShape3D_ul7y6")
+
+[node name="StateTimer" type="Timer" parent="." unique_id=333859283]

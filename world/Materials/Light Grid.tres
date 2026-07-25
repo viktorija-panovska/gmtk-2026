@@ -1,0 +1,7 @@
+[gd_resource type="StandardMaterial3D" format=3 uid="uid://cxe5getnidow4"]
+
+[ext_resource type="Texture2D" uid="uid://i25jsslaym81" path="res://world/Materials/Grid materials/Light/texture_07.png" id="1_pylgi"]
+
+[resource]
+albedo_texture = ExtResource("1_pylgi")
+uv1_triplanar = true
