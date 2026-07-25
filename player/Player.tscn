@@ -5,8 +5,9 @@
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_0rwas"]
 
 [node name="Player" type="CharacterBody3D" unique_id=573086008]
-collision_layer = 3
+collision_layer = 2
 script = ExtResource("1_xhfnw")
+debug = true
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1014014507]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)

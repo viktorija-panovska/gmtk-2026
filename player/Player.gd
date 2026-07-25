@@ -1,5 +1,6 @@
 extends CharacterBody3D
 
+@export var debug = false
 @export var speed = 6
 @export var SENSITIVITY = 0.004
 
@@ -36,15 +37,16 @@ func _unhandled_input(event):
 		camera.rotate_x(-event.relative.y * SENSITIVITY)
 		camera.rotation.x = clamp(camera.rotation.x, deg_to_rad(-80), deg_to_rad(80))
 		
-	# Uncapture the mouse when pressing the UI Cancel button (Default: Escape Key)
-	if event.is_action_pressed("ui_cancel"):
-		if Input.get_mouse_mode() == Input.MOUSE_MODE_CAPTURED:
-			Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
-	
-	# Recapture the mouse when clicking back inside the game window
-	if event is InputEventMouseButton and event.pressed:
-		if Input.get_mouse_mode() == Input.MOUSE_MODE_VISIBLE:
-			Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+	if debug:
+		# Uncapture the mouse when pressing the UI Cancel button (Default: Escape Key)
+		if event.is_action_pressed("ui_cancel"):
+			if Input.get_mouse_mode() == Input.MOUSE_MODE_CAPTURED:
+				Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+		
+		# Recapture the mouse when clicking back inside the game window
+		if event is InputEventMouseButton and event.pressed:
+			if Input.get_mouse_mode() == Input.MOUSE_MODE_VISIBLE:
+				Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 
 
 func _physics_process(delta):

@@ -63,7 +63,7 @@ func _ready() -> void:
 
 	vision_cone.body_sighted.connect(_on_body_sighted)
 	vision_cone.body_hidden.connect(_on_body_hidden)
-	vision_cone.body_entered.connect(func() -> void: #lambda goes brr
+	vision_cone.body_entered.connect(func(_body: Node3D) -> void:
 		print("Debug: player in cone")
 	)
 	vision_cone.body_exited.connect(_on_area_body_exited)

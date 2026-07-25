@@ -10,8 +10,8 @@ var _has_canvas_been_opened: bool
 
 
 func _ready() -> void:
-    body_entered.connect(func(_body: Node3D): _toggle_canvas_prompt(true))
-    body_exited.connect(func(_body: Node3D): _toggle_canvas_prompt(false))
+    body_entered.connect(func(_body: Node3D) -> void: _toggle_canvas_prompt(true))
+    body_exited.connect(func(_body: Node3D) -> void: _toggle_canvas_prompt(false))
     _wall.get_active_material(0).set_shader_parameter("use_stencil", Inventory.has_stencil())
     _wall.get_active_material(0).set_shader_parameter("stencil_tex", Inventory.get_available_stencil())
 
