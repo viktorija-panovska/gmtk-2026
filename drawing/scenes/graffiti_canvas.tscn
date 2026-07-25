@@ -9,7 +9,6 @@
 [ext_resource type="Texture2D" uid="uid://jx8ylfqxijx1" path="res://drawing/textures/blue_spray_paint_can.png" id="6_f11qt"]
 [ext_resource type="Texture2D" uid="uid://cr2bnb631mcyt" path="res://drawing/textures/red_spray_paint_can_cursor.png" id="8_y0qqk"]
 [ext_resource type="Texture2D" uid="uid://c4cjvh8qoyiq7" path="res://drawing/textures/blue_spray_paint_can_cursor.png" id="9_4y31e"]
-[ext_resource type="PackedScene" uid="uid://dcql52mmn7msp" path="res://game_flow/scenes/phone.tscn" id="10_8ygry"]
 [ext_resource type="Texture2D" uid="uid://i003ypde4eqr" path="res://drawing/textures/stencil_test.png" id="10_y0qqk"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_o483p"]
@@ -49,6 +48,7 @@ texture = ExtResource("3_mm5nj")
 
 [node name="Stencil" type="TextureRect" parent="." unique_id=521882559]
 unique_name_in_owner = true
+visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -68,10 +68,6 @@ offset_top = -59.0
 offset_bottom = 69.0
 grow_horizontal = 2
 grow_vertical = 0
-
-[node name="Phone" parent="." unique_id=175310537 instance=ExtResource("10_8ygry")]
-unique_name_in_owner = true
-layout_mode = 1
 
 [node name="Label" type="Label" parent="." unique_id=497447173]
 layout_mode = 1

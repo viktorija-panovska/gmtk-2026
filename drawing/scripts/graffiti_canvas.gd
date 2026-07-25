@@ -47,20 +47,8 @@ func set_current_cursor() -> void:
 	Input.set_custom_mouse_cursor(_current_cursor)
 
 
-func finalize_painting() -> Image:
-	var drawing: Image = _drawable_texture.get_image()
-	drawing.convert(Image.FORMAT_RGBA8)
-
-	var final = Image.create_empty(drawing.get_size().x, drawing.get_size().y, false, Image.FORMAT_RGBA8)
-	final.fill(Color.WHITE)
-	final.blend_rect(drawing, Rect2(Vector2(0, 0), drawing.get_size()), Vector2(0, 0))
-
-	if Inventory.has_stencil():
-		var mask: Image = Inventory.get_available_stencil().get_image()
-		mask.convert(Image.FORMAT_RGBA8)
-		final.blend_rect(mask, Rect2(Vector2(0, 0), mask.get_size()), Vector2(0, 0))
-
-	return final
+func get_drawing() -> Texture2D:
+	return _drawable_texture
 
 
 #region Painting

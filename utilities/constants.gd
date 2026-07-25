@@ -8,6 +8,8 @@ const SCENE_UID_LEVEL: String = "uid://daa1dyiclo5dq"
 const DEFAULT_COLOR: Color = Color.BLACK
 const INVALID_COLOR: Color = Color(-1, -1, -1, 0)
 
+const SHADER_UID_SCORING: String = "uid://bilxiun8lso8u"
+
 enum Location {
     NONE,
     WALL,
