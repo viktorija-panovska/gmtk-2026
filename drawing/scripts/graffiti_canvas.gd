@@ -8,7 +8,7 @@ class_name GraffitiCanvas extends Control
 @export var _spray_can_textures: Dictionary[Color, Texture2D]
 @export var _cursor_textures: Dictionary[Color, Texture2D]
 
-var _hovered_color: Color = Inventory.INVALID_COLOR
+var _hovered_color: Color = Constants.INVALID_COLOR
 var _hovered_spray_can: Control
 var _spray_can_tweens: Dictionary[Color, Tween]
 var _current_cursor: Texture2D
@@ -28,7 +28,7 @@ func _process(_delta: float) -> void:
 	if _phone.is_full_view(): return
 
 	if Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT):
-		if _hovered_color != Inventory.INVALID_COLOR:
+		if _hovered_color != Constants.INVALID_COLOR:
 			_set_active_color(_hovered_color)
 		else:
 			_paint()
@@ -40,7 +40,7 @@ func setup() -> void:
 	_stencil.visible = Inventory.has_stencil()
 	_stencil.texture = Inventory.get_available_stencil()
 	_fill_colors()
-	_set_active_color(Inventory.DEFAULT_COLOR)
+	_set_active_color(Constants.DEFAULT_COLOR)
 
 
 func set_current_cursor() -> void:
@@ -112,7 +112,7 @@ func _clear_hovered_color() -> void:
 	_spray_can_tweens[_hovered_color] = create_tween()
 	_spray_can_tweens[_hovered_color].tween_property(_hovered_spray_can, "position:y", 0, 0.2)
 
-	_hovered_color = Inventory.INVALID_COLOR
+	_hovered_color = Constants.INVALID_COLOR
 	_hovered_spray_can = null
 
 

@@ -11,6 +11,7 @@ config_version=5
 [application]
 
 config/name="graffiti-game"
+run/main_scene="uid://b81bweisx7gvg"
 config/features=PackedStringArray("4.7", "Forward Plus")
 config/icon="res://utilities/icon.svg"
 

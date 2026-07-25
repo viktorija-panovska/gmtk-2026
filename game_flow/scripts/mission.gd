@@ -6,6 +6,7 @@ class_name Mission extends Resource
 @export var _description: String
 @export var _police_countdown_seconds: int
 @export var _stencil: Texture2D
+@export var _location: Constants.Location
 
 
 func get_time_in_seconds() -> int:
@@ -30,3 +31,7 @@ func get_police_countdown_seconds() -> int:
 
 func get_stencil() -> Texture2D:
     return _stencil
+
+
+func get_location() -> Constants.Location:
+    return _location

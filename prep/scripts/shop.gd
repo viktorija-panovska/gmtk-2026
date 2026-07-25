@@ -4,13 +4,15 @@ extends Node3D
 @export var _color_prices: Dictionary[Color, int]
 
 var _is_stencil_hovered: bool = false
-var _hovered_color: Color = Inventory.INVALID_COLOR
+var _hovered_color: Color = Constants.INVALID_COLOR
 var _hovered_spray_can: StaticBody3D
 var _color_tweens: Dictionary[Color, Tween]
 var _stencil_tween: Tween
 var _no_money_tween: Tween
+var _door_tween: Tween
+var _is_door_hovered: bool
 
-@onready var _stencil: Node3D = %Stencil as Node3D
+@onready var _stencil: StaticBody3D = %Stencil as Node3D
 @onready var _stencil_mesh: MeshInstance3D = %StencilMesh as MeshInstance3D
 @onready var _stencil_price_label: Label = %StencilPrice as Control
 @onready var _paints: Dictionary[Color, StaticBody3D] = {
@@ -22,6 +24,8 @@ var _no_money_tween: Tween
 	Color.BLUE: %BluePrice as Label
 }
 @onready var _money_label: Label = %Money as Label
+@onready var _door: StaticBody3D = %Door as StaticBody3D
+@onready var _door_container: Node3D = %DoorContainer as Node3D
 
 
 func _ready() -> void:
@@ -41,16 +45,21 @@ func _ready() -> void:
 	for color in _paints:
 		_paints[color].mouse_entered.connect(func(): _hover_paint(_paints[color], color))
 		_paints[color].mouse_exited.connect(_unhover_paint)
+	
+	_door.mouse_entered.connect(func(): _toggle_door(true))
+	_door.mouse_exited.connect(func(): _toggle_door(false))
 
 
 func _process(_delta: float) -> void:
 	if not Input.is_action_just_pressed("Click"):
 		return
 	
-	if _hovered_color != Inventory.INVALID_COLOR:
+	if _hovered_color != Constants.INVALID_COLOR:
 		_buy_paint()
 	if _is_stencil_hovered:
 		_buy_stencil()
+	if _is_door_hovered:
+		_exit_shop()
 
 
 func _hover_paint(spray_can: StaticBody3D, color: Color) -> void:
@@ -74,7 +83,7 @@ func _unhover_paint() -> void:
 	_color_tweens[_hovered_color] = create_tween()
 	_color_tweens[_hovered_color].tween_property(_hovered_spray_can, "position:y", 0, 0.2)
 
-	_hovered_color = Inventory.INVALID_COLOR
+	_hovered_color = Constants.INVALID_COLOR
 	_hovered_spray_can = null
 
 
@@ -86,7 +95,7 @@ func _buy_paint() -> void:
 	_hovered_spray_can.process_mode = Node.PROCESS_MODE_DISABLED
 	var color: Color = _hovered_color
 	var can: Node3D = _hovered_spray_can
-	_hovered_color = Inventory.INVALID_COLOR
+	_hovered_color = Constants.INVALID_COLOR
 	_hovered_spray_can = null
 	
 	if color in _color_tweens:
@@ -144,3 +153,15 @@ func _try_buy(price: int) -> bool:
 	Inventory.spend_money(price)
 	_money_label.text = "BUDGET: $%s" % Inventory.get_money()
 	return true
+
+
+func _toggle_door(open: bool) -> void:
+	_is_door_hovered = open
+	if _door_tween:
+		_door_tween.kill()
+	_door_tween = create_tween()
+	_door_tween.tween_property(_door_container, "global_rotation:y", -0.3 if open else 0.0, 0.5)
+
+
+func _exit_shop() -> void:
+	SceneLoader.load_scene(Constants.SCENE_UID_LEVEL)

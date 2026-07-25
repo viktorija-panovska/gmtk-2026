@@ -1,5 +1,7 @@
 extends Node
 
+signal scene_load_finished
+
 var _scene_path: String
 var _fade_tween: Tween
 var _black_screen: ColorRect
@@ -50,6 +52,7 @@ func _start_load() -> void:
 func _finish_load() -> void:
 	set_process(false)
 	get_tree().change_scene_to_packed(ResourceLoader.load_threaded_get(_scene_path))
+	scene_load_finished.emit()
 
 	if _fade_tween:
 		_fade_tween.kill()

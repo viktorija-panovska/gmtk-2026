@@ -16,6 +16,13 @@ albedo_color = Color(0.30416793, 0.023889972, 2.815649e-06, 1)
 material = SubResource("StandardMaterial3D_yxnod")
 size = Vector3(3, 0.5, 0.5)
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_0lp54"]
+albedo_color = Color(0, 0, 0, 1)
+
+[sub_resource type="QuadMesh" id="QuadMesh_xxhxr"]
+material = SubResource("StandardMaterial3D_0lp54")
+size = Vector2(0.44, 1.6)
+
 [sub_resource type="CylinderMesh" id="CylinderMesh_o483p"]
 top_radius = 0.1
 bottom_radius = 0.1
@@ -38,6 +45,34 @@ size = Vector2(0.8, 0.8)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_yxnod"]
 size = Vector3(0.8, 0.8, 0.2)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_xr744"]
+albedo_color = Color(0, 1, 0, 1)
+roughness = 0.0
+emission_energy_multiplier = 8.05
+emission_operator = 1
+
+[sub_resource type="QuadMesh" id="QuadMesh_334lf"]
+material = SubResource("StandardMaterial3D_xr744")
+size = Vector2(0.3, 0.2)
+
+[sub_resource type="TextMesh" id="TextMesh_ehc2p"]
+text = "EXIT"
+font_size = 14
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ad734"]
+albedo_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_j1df2"]
+albedo_color = Color(0.57464707, 0.35953623, 0.15044531, 1)
+normal_scale = 16.0
+
+[sub_resource type="BoxMesh" id="BoxMesh_0lp54"]
+material = SubResource("StandardMaterial3D_j1df2")
+size = Vector3(0.03, 1.6, 0.44)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_o483p"]
+size = Vector3(0.03, 1.6, 0.44)
 
 [sub_resource type="LabelSettings" id="LabelSettings_yxnod"]
 font_size = 30
@@ -80,6 +115,10 @@ mesh = SubResource("QuadMesh_o483p")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.2986865, -0.7154968)
 mesh = SubResource("BoxMesh_kyohr")
 
+[node name="DoorHole" type="MeshInstance3D" parent="Room" unique_id=1610856433]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 1.499, 0.244, -1.205)
+mesh = SubResource("QuadMesh_xxhxr")
+
 [node name="PaintCans" type="Node3D" parent="." unique_id=2055196002]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.13161337, 0)
 
@@ -118,6 +157,31 @@ surface_material_override/0 = SubResource("StandardMaterial3D_lxdrg")
 [node name="Collider" type="CollisionShape3D" parent="Stencil" unique_id=958984205]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.08694458)
 shape = SubResource("BoxShape3D_yxnod")
+
+[node name="Door" type="StaticBody3D" parent="." unique_id=1083434329]
+unique_name_in_owner = true
+transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, 1.4933743, 0.2442854, -1.4247388)
+
+[node name="DoorContainer" type="Node3D" parent="Door" unique_id=837535817]
+unique_name_in_owner = true
+transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, 0, 0, 0)
+
+[node name="Exit" type="MeshInstance3D" parent="Door/DoorContainer" unique_id=32315981]
+transform = Transform3D(-4.3711367e-08, 0, -0.99999964, 0, 1, 0, 0.99999964, 0, -4.3711367e-08, -0.016000032, 0.58503693, 0.22)
+mesh = SubResource("QuadMesh_334lf")
+
+[node name="ExitText" type="MeshInstance3D" parent="Door/DoorContainer" unique_id=1893578164]
+transform = Transform3D(-4.3711367e-08, 0, -0.99999964, 0, 1, 0, 0.99999964, 0, -4.3711367e-08, 0.006455183, 0.58503693, 0.22)
+mesh = SubResource("TextMesh_ehc2p")
+surface_material_override/0 = SubResource("StandardMaterial3D_ad734")
+
+[node name="DoorMesh" type="MeshInstance3D" parent="Door/DoorContainer" unique_id=1651446246]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.22)
+mesh = SubResource("BoxMesh_0lp54")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Door" unique_id=971604683]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.22)
+shape = SubResource("BoxShape3D_o483p")
 
 [node name="UI" type="Control" parent="." unique_id=440737250]
 layout_mode = 3
