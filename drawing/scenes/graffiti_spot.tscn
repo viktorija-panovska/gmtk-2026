@@ -1,0 +1,124 @@
+[gd_scene format=3 uid="uid://yo1fhj3ry2ou"]
+
+[ext_resource type="Script" uid="uid://cl8h4mf8lygkp" path="res://drawing/scripts/graffiti_spot.gd" id="1_6ugl6"]
+[ext_resource type="Shader" uid="uid://xo3quejyuxex" path="res://drawing/textures/drawn_texture_apply.gdshader" id="1_livfm"]
+[ext_resource type="Texture2D" uid="uid://w5kafc3luitw" path="res://utilities/icon.svg" id="2_livfm"]
+[ext_resource type="Texture2D" uid="uid://i003ypde4eqr" path="res://drawing/textures/stencil_test.png" id="3_6ugl6"]
+[ext_resource type="PackedScene" uid="uid://n12t5sb631if" path="res://drawing/scenes/graffiti_canvas.tscn" id="4_6ugl6"]
+[ext_resource type="Texture2D" uid="uid://c8jrrpiyfvtu2" path="res://drawing/textures/drawable_texture.tres" id="4_w6608"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_o483p"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_j21dl"]
+render_priority = 0
+shader = ExtResource("1_livfm")
+shader_parameter/background_tex = ExtResource("2_livfm")
+shader_parameter/drawing_tex = ExtResource("4_w6608")
+shader_parameter/stencil_tex = ExtResource("3_6ugl6")
+shader_parameter/use_stencil = false
+
+[sub_resource type="QuadMesh" id="QuadMesh_o483p"]
+material = SubResource("ShaderMaterial_j21dl")
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_o483p"]
+top_radius = 0.05
+bottom_radius = 0.05
+height = 0.2
+
+[sub_resource type="Animation" id="Animation_livfm"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Indicator:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(-0.35782, -0.2100483, -0.22195897)]
+}
+
+[sub_resource type="Animation" id="Animation_6ugl6"]
+resource_name = "SpinCan"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Indicator:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5, 1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector3(-0.3577925, 0, -0.22165681), Vector3(-0.3577925, 3.1415927, -0.22165681), Vector3(-0.3577925, 6.2831855, -0.22165681)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_w6608"]
+_data = {
+&"RESET": SubResource("Animation_livfm"),
+&"SpinCan": SubResource("Animation_6ugl6")
+}
+
+[sub_resource type="LabelSettings" id="LabelSettings_o483p"]
+font_size = 40
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_o483p"]
+radius = 0.1796875
+height = 1.1621094
+
+[node name="GraffitiSpot" type="Area3D" unique_id=635317721]
+script = ExtResource("1_6ugl6")
+
+[node name="Camera3D" type="Camera3D" parent="." unique_id=277736781]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1.1673826)
+
+[node name="DetectionArea" type="CollisionShape3D" parent="." unique_id=2056115252]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.5)
+shape = SubResource("BoxShape3D_o483p")
+
+[node name="GraffitiWall" type="MeshInstance3D" parent="." unique_id=1509438525]
+unique_name_in_owner = true
+mesh = SubResource("QuadMesh_o483p")
+
+[node name="Indicator" type="MeshInstance3D" parent="." unique_id=1828264155]
+transform = Transform3D(0.937952, 0.28653708, -0.19530083, -0.20619775, 0.9136844, 0.35023314, 0.27879807, -0.2882313, 0.9160755, 0, 0, 0.5)
+mesh = SubResource("CylinderMesh_o483p")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1280825801]
+libraries/ = SubResource("AnimationLibrary_w6608")
+autoplay = &"SpinCan"
+
+[node name="Canvas" parent="." unique_id=2064535663 instance=ExtResource("4_6ugl6")]
+unique_name_in_owner = true
+process_mode = 4
+visible = false
+mouse_filter = 2
+
+[node name="Prompt" type="Label" parent="." unique_id=740218080]
+unique_name_in_owner = true
+visible = false
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -285.0
+offset_top = -54.25
+offset_right = 285.0
+offset_bottom = 54.25
+grow_horizontal = 2
+grow_vertical = 2
+text = "Press E to start drawing"
+label_settings = SubResource("LabelSettings_o483p")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="CharacterBody3D" type="CharacterBody3D" parent="." unique_id=276574746]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0068730116, 0, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="CharacterBody3D" unique_id=475825784]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.4189453, 0)
+shape = SubResource("CapsuleShape3D_o483p")

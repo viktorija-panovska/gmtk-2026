@@ -1,4 +1,4 @@
-extends Control
+class_name GraffitiCanvas extends Control
 
 @export var _drawable_texture: DrawableTexture2D
 @export var _brush_texture: Texture2D
@@ -11,6 +11,7 @@ extends Control
 var _hovered_color: Color = Inventory.INVALID_COLOR
 var _hovered_spray_can: Control
 var _spray_can_tweens: Dictionary[Color, Tween]
+var _current_cursor: Texture2D
 
 @onready var _color_container: HBoxContainer = %ColorContainer as HBoxContainer
 @onready var _stencil: TextureRect = %Stencil as TextureRect
@@ -21,15 +22,10 @@ var _spray_can_tweens: Dictionary[Color, Tween]
 
 func _ready() -> void:
 	_drawable_texture.setup(get_viewport().size.x, get_viewport().size.y, DrawableTexture2D.DRAWABLE_FORMAT_RGBA8, Color(0,0,0,0))
-	_stencil.visible = Inventory.has_stencil()
-	_stencil.texture = Inventory.get_available_stencil()
-	_fill_colors()
-	_set_active_color(Inventory.DEFAULT_COLOR)
 
 
 func _process(_delta: float) -> void:
-	if _phone.is_full_view():
-		return
+	if _phone.is_full_view(): return
 
 	if Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT):
 		if _hovered_color != Inventory.INVALID_COLOR:
@@ -37,20 +33,21 @@ func _process(_delta: float) -> void:
 		else:
 			_paint()
 
-	if Input.is_mouse_button_pressed(MOUSE_BUTTON_RIGHT):
-		_finalize_painting()
-
 #endregion
 
 
-#region Painting
+func setup() -> void:
+	_stencil.visible = Inventory.has_stencil()
+	_stencil.texture = Inventory.get_available_stencil()
+	_fill_colors()
+	_set_active_color(Inventory.DEFAULT_COLOR)
 
-func _paint() -> void:
-	var mouse_pos = get_global_mouse_position()
-	_drawable_texture.blit_rect(Rect2i(mouse_pos.x, mouse_pos.y, _size, _size), _brush_texture, _color)
+
+func set_current_cursor() -> void:
+	Input.set_custom_mouse_cursor(_current_cursor)
 
 
-func _finalize_painting() -> Image:
+func finalize_painting() -> Image:
 	var drawing: Image = _drawable_texture.get_image()
 	drawing.convert(Image.FORMAT_RGBA8)
 
@@ -64,6 +61,13 @@ func _finalize_painting() -> Image:
 		final.blend_rect(mask, Rect2(Vector2(0, 0), mask.get_size()), Vector2(0, 0))
 
 	return final
+
+
+#region Painting
+
+func _paint() -> void:
+	var mouse_pos = get_global_mouse_position()
+	_drawable_texture.blit_rect(Rect2i(mouse_pos.x, mouse_pos.y, _size, _size), _brush_texture, _color)
 
 #endregion
 
@@ -86,7 +90,8 @@ func _clear_colors() -> void:
 
 
 func _set_hovered_color(color: Color, spray_can: Control) -> void:
-	Input.set_custom_mouse_cursor(null)
+	_current_cursor = null
+	set_current_cursor()
 	_hovered_color = color
 	_hovered_spray_can = spray_can
 
@@ -98,7 +103,8 @@ func _set_hovered_color(color: Color, spray_can: Control) -> void:
 
 
 func _clear_hovered_color() -> void:
-	Input.set_custom_mouse_cursor(_cursor_textures[_color])
+	_current_cursor = _cursor_textures[_color]
+	set_current_cursor()
 
 	if _hovered_color in _spray_can_tweens:
 		_spray_can_tweens[_hovered_color].kill()
@@ -113,7 +119,8 @@ func _clear_hovered_color() -> void:
 func _set_active_color(color: Color) -> void:
 	_color = color
 	if color in _cursor_textures:
-		Input.set_custom_mouse_cursor(_cursor_textures[_color])
+		_current_cursor = _cursor_textures[_color]
+		set_current_cursor()
 		_phone.set_scene_cursor(_cursor_textures[color])
 
 #endregion

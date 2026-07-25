@@ -19,7 +19,7 @@ func _ready() -> void:
 	_phone.mouse_entered.connect(_hover_phone)
 	_phone.mouse_exited.connect(_unhover_phone)
 	GameManager.police_incoming.connect(_show_police_alert)
-	_reference.texture = GameManager.get_reference_image()
+	#_reference.texture = GameManager.get_reference_image()
 
 
 func _process(_delta: float) -> void:
