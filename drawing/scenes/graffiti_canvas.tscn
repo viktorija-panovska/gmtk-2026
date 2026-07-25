@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://n12t5sb631if"]
 
-[ext_resource type="Script" uid="uid://c1fwi47kh64eq" path="res://drawing/scripts/2D_canvas.gd" id="1_5lmgc"]
+[ext_resource type="Script" uid="uid://c1fwi47kh64eq" path="res://drawing/scripts/graffiti_canvas.gd" id="1_5lmgc"]
 [ext_resource type="Texture2D" uid="uid://cgvchcvgwev2u" path="res://drawing/textures/smooth_brush_shape.webp" id="3_gryyh"]
 [ext_resource type="Texture2D" uid="uid://c8jrrpiyfvtu2" path="res://drawing/textures/drawable_texture.tres" id="3_mm5nj"]
 [ext_resource type="Texture2D" uid="uid://eunhlm3j40c5" path="res://drawing/textures/black_spray_paint_can.png" id="4_afwnh"]
@@ -12,7 +12,10 @@
 [ext_resource type="PackedScene" uid="uid://dcql52mmn7msp" path="res://game_flow/scenes/phone.tscn" id="10_8ygry"]
 [ext_resource type="Texture2D" uid="uid://i003ypde4eqr" path="res://drawing/textures/stencil_test.png" id="10_y0qqk"]
 
-[node name="2D Canvas" type="Control" unique_id=2064535663]
+[sub_resource type="LabelSettings" id="LabelSettings_o483p"]
+font_color = Color(0, 0, 0, 1)
+
+[node name="GraffitiCanvas" type="Control" unique_id=2064535663]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -69,3 +72,16 @@ grow_vertical = 0
 [node name="Phone" parent="." unique_id=175310537 instance=ExtResource("10_8ygry")]
 unique_name_in_owner = true
 layout_mode = 1
+
+[node name="Label" type="Label" parent="." unique_id=497447173]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -188.0
+offset_top = 4.0
+offset_right = -12.0
+offset_bottom = 27.0
+grow_horizontal = 0
+text = "Press E to close canvas"
+label_settings = SubResource("LabelSettings_o483p")

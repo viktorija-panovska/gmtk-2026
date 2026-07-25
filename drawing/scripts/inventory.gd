@@ -1,21 +1,18 @@
 extends Node
 
-const DEFAULT_COLOR: Color = Color.BLACK
-const INVALID_COLOR: Color = Color(-1, -1, -1, 0)
-
 var _money: int = 50
 var _available_colors: Array[Color]
 var _available_stencil: Texture2D
 
 
 func _ready() -> void:
-    _available_colors.append(DEFAULT_COLOR)
+    _available_colors.append(Constants.DEFAULT_COLOR)
 
 
 # Called at end of mission to clear out all items
 func clear_items() -> void:
     _available_colors.clear()
-    _available_colors.append(DEFAULT_COLOR)
+    _available_colors.append(Constants.DEFAULT_COLOR)
     _available_stencil = null
 
 

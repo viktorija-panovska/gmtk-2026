@@ -69,23 +69,20 @@ func get_mission(idx: int) -> Mission:
 
 
 func get_reference_image() -> Texture2D:
-	return _current_mission.get_reference_image()
+	return _current_mission.get_reference_image() if _current_mission else null
 
 
 func get_stencil() -> Texture2D:
-	return _current_mission.get_stencil()
+	return _current_mission.get_stencil() if _current_mission else null
+
+
+func get_graffiti_location() -> Constants.Location:
+	return _current_mission.get_location() if _current_mission else Constants.Location.NONE
 
 
 func accept_mission(idx: int) -> void:
 	_current_mission = _missions[idx]
 	_current_mission_idx = idx
 	SceneLoader.load_scene(Constants.SCENE_UID_SHOP)
-
-
-func start_mission() -> void:
-	_mission_countdown = _current_mission.get_time_in_seconds()
-	_police_countdown = _current_mission.get_police_countdown_seconds()
-	_police_incoming_alert_seconds = _police_countdown / 2
-	_has_mission_started = true
 
 #endregion

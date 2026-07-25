@@ -11,3 +11,4 @@ _reference_image = ExtResource("1_3chqq")
 _description = "AAAAAAAAAAAAA"
 _police_countdown_seconds = 50
 _stencil = ExtResource("1_3chqq")
+_location = 1
