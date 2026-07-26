@@ -5,7 +5,14 @@ var _quit_button_tween: Tween
 
 @onready var _start_button: Button = %StartButton as Button
 @onready var _quit_button: Button = %QuitButton as Button
+#@onready var _hover_sound: AudioStreamPlayer = %HoverSoundPlayer as AudioStreamPlayer
+#@onready var _click_sound: AudioStreamPlayer = %ClickSoundPlayer as AudioStreamPlayer
 
+func _play_sfx(player: AudioStreamPlayer) -> void:
+	if not player:
+		return
+	player.stop()
+	player.play()
 
 func _ready() -> void:
 	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)

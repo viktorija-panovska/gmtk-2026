@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://buekvbbx3x8ub"
+path="res://.godot/imported/hover spray.mp3-e848721fa6cb597d43b53f9257b8191d.mp3str"
+
+[deps]
+
+source_file="res://sounds/hover spray.mp3"
+dest_files=["res://.godot/imported/hover spray.mp3-e848721fa6cb597d43b53f9257b8191d.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

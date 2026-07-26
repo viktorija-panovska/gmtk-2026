@@ -18,6 +18,7 @@ var _current_cursor: Texture2D
 @onready var _stencil: TextureRect = %Stencil as TextureRect
 
 
+
 #region Built-in Methods
 
 func _ready() -> void:
@@ -25,7 +26,11 @@ func _ready() -> void:
 
 
 func _process(_delta: float) -> void:
-	if _phone.is_full_view(): return
+	#if _phone.is_full_view(): return
+	### remove
+	if Input.is_action_just_pressed("Interact"):
+		_drawable_texture.get_image().save_png("a.png")
+
 
 	if Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT):
 		if _hovered_color != Constants.INVALID_COLOR:
@@ -36,12 +41,12 @@ func _process(_delta: float) -> void:
 #endregion
 
 
-func setup(phone: Phone) -> void:
-	_phone = phone
-	_stencil.visible = Inventory.has_stencil()
-	_stencil.texture = Inventory.get_available_stencil()
-	_fill_colors()
-	_set_active_color(Constants.DEFAULT_COLOR)
+#func setup(phone: Phone) -> void:
+#	_phone = phone
+#	_stencil.visible = Inventory.has_stencil()
+#	_stencil.texture = Inventory.get_available_stencil()
+#	_fill_colors()
+#	_set_active_color(Constants.DEFAULT_COLOR)
 
 
 func set_current_cursor() -> void:

@@ -10,42 +10,42 @@ func _ready() -> void:
 
 # Called at end of mission to clear out all items
 func clear_items() -> void:
-    _available_colors.clear()
-    _available_colors.append(Constants.DEFAULT_COLOR)
-    _available_stencil = null
+	_available_colors.clear()
+	_available_colors.append(Constants.DEFAULT_COLOR)
+	_available_stencil = null
 
 
 func get_available_colors() -> Array[Color]:
-    return _available_colors
+	return _available_colors
 
 
 func gain_color(color: Color) -> void:
-    _available_colors.append(color)
+	_available_colors.append(color)
 
 
 func get_available_stencil() -> Texture2D:
-    return _available_stencil
+	return _available_stencil
 
 
 func has_stencil() -> bool:
-    return _available_stencil != null
+	return _available_stencil != null
 
 
 func gain_stencil(stencil: Texture2D) -> void:
-    _available_stencil = stencil
+	_available_stencil = stencil
 
 
 func get_money() -> int:
-    return _money
+	return _money
 
 
 func gain_money(amount: int) -> void:
-    _money += amount
+	_money += amount
 
 
 func spend_money(amount: int) -> void:
-    _money -= amount
+	_money -= amount
 
 
 func has_enough_money(price: int) -> bool:
-    return _money - price >= 0
+	return _money - price >= 0
