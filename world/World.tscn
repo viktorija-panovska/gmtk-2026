@@ -51,9 +51,6 @@ volumetric_fog_density = 0.1
 volumetric_fog_albedo = Color(0.89925843, 0.8992584, 0.89925843, 1)
 volumetric_fog_emission = Color(0.014211937, 3.619207e-09, 1.1280645e-09, 1)
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_q2d71"]
-size = Vector3(5.156006, 3.593872, 5.4486456)
-
 [sub_resource type="BoxShape3D" id="BoxShape3D_tx47m"]
 size = Vector3(2.9347076, 2.6842957, 1.9945984)
 
@@ -82,6 +79,9 @@ shader_parameter/use_stencil = false
 [sub_resource type="QuadMesh" id="QuadMesh_pbtp0"]
 material = SubResource("ShaderMaterial_fy8qs")
 size = Vector2(2.5, 2)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_q2d71"]
+size = Vector3(5.156006, 3.593872, 5.4486456)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_3j5ad"]
 render_priority = 0
@@ -227,6 +227,16 @@ transform = Transform3D(0.23676026, 0, -1.9859366, 0, 2, 0, 1.9859366, 0, 0.2367
 unique_name_in_owner = true
 transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -197.53362, 1.7131796, -10.265059)
 
+[node name="DetectionArea" parent="GraffitiSpot1" index="0" unique_id=2056115252]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.040611267, -0.13664246, 0.944046)
+shape = SubResource("BoxShape3D_tx47m")
+
+[node name="GraffitiWall" parent="GraffitiSpot1" index="1" unique_id=1509438525]
+mesh = SubResource("QuadMesh_pbtp0")
+
+[node name="Indicator" parent="GraffitiSpot1" index="2" unique_id=1828264155]
+transform = Transform3D(0.09379521, 0.057307426, -0.019530086, -0.020619778, 0.18273692, 0.03502332, 0.02787981, -0.05764627, 0.09160757, 0, -0.077862024, 0.9181366)
+
 [node name="DrawingSiteSpot5" type="Area3D" parent="GraffitiSpot1" unique_id=1238159840 node_paths=PackedStringArray("cop")]
 transform = Transform3D(0.0015437464, 0, -0.9999987, 0, 1, 0, 0.9999987, 0, 0.0015437464, 81.746796, -1.6704035, 3.5916443)
 script = ExtResource("6_gqh78")
@@ -239,16 +249,6 @@ debug_color = Color(0, 0.6, 0.7, 0.42)
 
 [node name="DrawingSiteSpot" type="Marker3D" parent="GraffitiSpot1/DrawingSiteSpot5" unique_id=319669304]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.7819824, 3.7252958, 84.29564)
-
-[node name="DetectionArea" parent="GraffitiSpot1" index="1" unique_id=2056115252]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.040611267, -0.13664246, 0.944046)
-shape = SubResource("BoxShape3D_tx47m")
-
-[node name="GraffitiWall" parent="GraffitiSpot1" index="2" unique_id=1509438525]
-mesh = SubResource("QuadMesh_pbtp0")
-
-[node name="Indicator" parent="GraffitiSpot1" index="3" unique_id=1828264155]
-transform = Transform3D(0.09379521, 0.057307426, -0.019530086, -0.020619778, 0.18273692, 0.03502332, 0.02787981, -0.05764627, 0.09160757, 0, -0.077862024, 0.9181366)
 
 [node name="GraffitiSpot2" type="Area3D" parent="." unique_id=1937878563]
 unique_name_in_owner = true
