@@ -8,6 +8,7 @@ class_name GraffitiCanvas extends Control
 @export var _spray_can_textures: Dictionary[Color, Texture2D]
 @export var _cursor_textures: Dictionary[Color, Texture2D]
 
+var _phone: Phone
 var _hovered_color: Color = Constants.INVALID_COLOR
 var _hovered_spray_can: Control
 var _spray_can_tweens: Dictionary[Color, Tween]
@@ -15,7 +16,6 @@ var _current_cursor: Texture2D
 
 @onready var _color_container: HBoxContainer = %ColorContainer as HBoxContainer
 @onready var _stencil: TextureRect = %Stencil as TextureRect
-@onready var _phone: Phone = %Phone as Phone
 
 
 #region Built-in Methods
@@ -36,7 +36,8 @@ func _process(_delta: float) -> void:
 #endregion
 
 
-func setup() -> void:
+func setup(phone: Phone) -> void:
+	_phone = phone
 	_stencil.visible = Inventory.has_stencil()
 	_stencil.texture = Inventory.get_available_stencil()
 	_fill_colors()

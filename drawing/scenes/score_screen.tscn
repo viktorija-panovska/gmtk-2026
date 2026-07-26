@@ -1,9 +1,12 @@
 [gd_scene format=3 uid="uid://c2udup3lclvr8"]
 
 [ext_resource type="Script" uid="uid://dlmlbml5pvh8c" path="res://drawing/scripts/score_screen.gd" id="1_2sgcj"]
+[ext_resource type="Texture2D" uid="uid://coam10wk5rn2w" path="res://utilities/brick-wall.tga" id="2_ymnk2"]
 [ext_resource type="Shader" uid="uid://dwibwuxl2f06v" path="res://drawing/textures/drawn_texture_apply2d.gdshader" id="3_ymnk2"]
 [ext_resource type="Texture2D" uid="uid://c8jrrpiyfvtu2" path="res://drawing/textures/drawable_texture.tres" id="4_7yenf"]
 [ext_resource type="Texture2D" uid="uid://i003ypde4eqr" path="res://drawing/textures/stencil_test.png" id="5_0t6bf"]
+[ext_resource type="FontFile" uid="uid://c64h0y83mlq7n" path="res://utilities/DonGraffiti.otf" id="6_7yenf"]
+[ext_resource type="FontFile" uid="uid://cfrfthihnbi7l" path="res://utilities/nokiafc22.ttf" id="7_7yenf"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_bmoqq"]
 shader = ExtResource("3_ymnk2")
@@ -25,29 +28,22 @@ corner_radius_top_right = 20
 corner_radius_bottom_right = 20
 corner_radius_bottom_left = 20
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_o483p"]
-bg_color = Color(0.1753585, 0.32111248, 0.11555696, 1)
-corner_radius_top_left = 100
-corner_radius_top_right = 100
-corner_radius_bottom_right = 100
-corner_radius_bottom_left = 100
+[sub_resource type="LabelSettings" id="LabelSettings_0t6bf"]
+font = ExtResource("6_7yenf")
+font_size = 100
+font_color = Color(0, 0, 0, 1)
 
-[sub_resource type="LabelSettings" id="LabelSettings_o483p"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ehc2p"]
+bg_color = Color(0, 0, 0, 1)
+corner_radius_top_left = 50
+corner_radius_top_right = 50
+corner_radius_bottom_right = 50
+corner_radius_bottom_left = 50
+
+[sub_resource type="LabelSettings" id="LabelSettings_wswfh"]
+font = ExtResource("7_7yenf")
 font_size = 80
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ymnk2"]
-bg_color = Color(0.52906674, 0.52906674, 0.52906656, 0.37254903)
-corner_radius_top_left = 50
-corner_radius_top_right = 50
-corner_radius_bottom_right = 50
-corner_radius_bottom_left = 50
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_2sgcj"]
-bg_color = Color(0, 0.5175927, 0, 1)
-corner_radius_top_left = 50
-corner_radius_top_right = 50
-corner_radius_bottom_right = 50
-corner_radius_bottom_left = 50
+font_color = Color(0, 0, 0, 1)
 
 [node name="ScoreScreen" type="Control" unique_id=881119054]
 layout_mode = 3
@@ -58,56 +54,50 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_2sgcj")
 
-[node name="BG" type="ColorRect" parent="." unique_id=1584540035]
+[node name="BG" type="TextureRect" parent="." unique_id=649940083]
+self_modulate = Color(0.66288584, 0.66288584, 0.66288584, 0.8156863)
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_left = -429.0
+offset_top = -188.0
+offset_right = 205.0
+offset_bottom = 188.0
 grow_horizontal = 2
 grow_vertical = 2
-color = Color(0.38619193, 0.16512793, 0.11975723, 1)
+texture = ExtResource("2_ymnk2")
+stretch_mode = 1
+flip_v = true
 
-[node name="ColorRect" type="ColorRect" parent="." unique_id=1928138010]
-layout_mode = 1
-anchors_preset = -1
-anchor_left = 0.259
-anchor_top = 0.342
-anchor_right = 0.259
-anchor_bottom = 0.342
-offset_left = -256.368
-offset_top = -145.616
-offset_right = 255.63199
-offset_bottom = 145.384
-
-[node name="Reference" type="TextureRect" parent="ColorRect" unique_id=1174788778]
+[node name="Reference" type="TextureRect" parent="." unique_id=1174788778]
 unique_name_in_owner = true
 layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
+anchors_preset = -1
+anchor_left = 0.036000002
+anchor_top = 0.117000006
+anchor_right = 0.48200002
+anchor_bottom = 0.568
+offset_left = 0.52799606
+offset_top = 0.18399811
+offset_right = -0.2640381
+offset_bottom = -0.06402588
 grow_horizontal = 2
 grow_vertical = 2
-expand_mode = 2
 
-[node name="ColorRect2" type="ColorRect" parent="." unique_id=1204819261]
-layout_mode = 1
-anchors_preset = -1
-anchor_left = 0.739
-anchor_top = 0.342
-anchor_right = 0.739
-anchor_bottom = 0.342
-offset_left = -256.328
-offset_top = -145.616
-offset_right = 255.672
-offset_bottom = 145.384
-
-[node name="Drawing" type="TextureRect" parent="ColorRect2" unique_id=591102119]
+[node name="Drawing" type="TextureRect" parent="." unique_id=591102119]
 unique_name_in_owner = true
 material = SubResource("ShaderMaterial_bmoqq")
 layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
+anchors_preset = -1
+anchor_left = 0.51600003
+anchor_top = 0.117000006
+anchor_right = 0.961
+anchor_bottom = 0.558
+offset_left = 0.56799316
+offset_top = 0.18399811
+offset_right = -1.0720215
+offset_bottom = 5.415985
 grow_horizontal = 2
 grow_vertical = 2
 expand_mode = 2
@@ -127,43 +117,13 @@ offset_bottom = 166.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_font_sizes/font_size = 35
+theme_override_fonts/font = ExtResource("6_7yenf")
+theme_override_font_sizes/font_size = 60
 theme_override_styles/background = SubResource("StyleBoxFlat_lxdrg")
 theme_override_styles/fill = SubResource("StyleBoxFlat_kyohr")
 value = 100.0
 
-[node name="Reward" type="Panel" parent="." unique_id=9309520]
-unique_name_in_owner = true
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -168.5
-offset_top = -88.5
-offset_right = 168.5
-offset_bottom = 88.5
-grow_horizontal = 2
-grow_vertical = 2
-offset_transform_enabled = true
-offset_transform_position = Vector2(0, -500)
-theme_override_styles/panel = SubResource("StyleBoxFlat_o483p")
-
-[node name="RewardText" type="Label" parent="Reward" unique_id=1985685663]
-unique_name_in_owner = true
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-text = "+$"
-label_settings = SubResource("LabelSettings_o483p")
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="Back" type="Button" parent="." unique_id=1908043048]
+[node name="Back" type="Button" parent="." unique_id=1309422019]
 unique_name_in_owner = true
 layout_mode = 1
 anchors_preset = 7
@@ -171,13 +131,63 @@ anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
-offset_left = -105.0
-offset_top = -97.0
-offset_right = 105.0
-offset_bottom = -34.0
+offset_left = -157.0
+offset_top = -120.0
+offset_right = 157.0
+offset_bottom = -35.0
 grow_horizontal = 2
 grow_vertical = 0
-theme_override_font_sizes/font_size = 40
-theme_override_styles/normal = SubResource("StyleBoxFlat_ymnk2")
-theme_override_styles/hover = SubResource("StyleBoxFlat_2sgcj")
+pivot_offset = Vector2(157, 42)
+flat = true
+
+[node name="Label" type="Label" parent="Back" unique_id=261233812]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 text = "BACK"
+label_settings = SubResource("LabelSettings_0t6bf")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Phone" type="Panel" parent="." unique_id=828205897]
+unique_name_in_owner = true
+self_modulate = Color(0, 0, 0, 1)
+layout_mode = 0
+offset_left = 342.0
+offset_top = 268.0
+offset_right = 822.0
+offset_bottom = 933.1955
+offset_transform_enabled = true
+offset_transform_position = Vector2(0, 400)
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_ehc2p")
+
+[node name="PhoneBG" type="ColorRect" parent="Phone" unique_id=1754820182]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.095000006
+anchor_top = 0.031000001
+anchor_right = 0.92600006
+anchor_bottom = 0.45900002
+offset_left = -2.5999947
+offset_top = 33.37892
+offset_right = -2.169983
+offset_bottom = 35.546906
+mouse_filter = 2
+color = Color(0.5882353, 0.7921569, 0.6745098, 1)
+
+[node name="Reward" type="Label" parent="Phone/PhoneBG" unique_id=648005880]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "+$50"
+label_settings = SubResource("LabelSettings_wswfh")
+horizontal_alignment = 1
+vertical_alignment = 1

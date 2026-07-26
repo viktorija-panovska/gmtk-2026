@@ -1,14 +1,21 @@
 [gd_scene format=3 uid="uid://daa1dyiclo5dq"]
 
-[ext_resource type="Script" uid="uid://dodglx38vlsj0" path="res://level_manager.gd" id="1_vonw3"]
+[ext_resource type="Script" uid="uid://dodglx38vlsj0" path="res://world/scripts/level_manager.gd" id="1_vonw3"]
+[ext_resource type="PackedScene" uid="uid://dihp3sy40mje7" path="res://player/Player.tscn" id="2_0b4ue"]
 [ext_resource type="PackedScene" uid="uid://yo1fhj3ry2ou" path="res://drawing/scenes/graffiti_spot.tscn" id="2_oi3di"]
 [ext_resource type="PackedScene" uid="uid://dcql52mmn7msp" path="res://game_flow/scenes/phone.tscn" id="3_oi3di"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_o483p"]
+size = Vector3(12.23053, 0.001, 9.928223)
 
 [node name="Level" type="Node3D" unique_id=1031118639 node_paths=PackedStringArray("_graffiti_locations")]
 script = ExtResource("1_vonw3")
 _graffiti_locations = {
 1: NodePath("Marker3D")
 }
+
+[node name="Player" parent="." unique_id=573086008 instance=ExtResource("2_0b4ue")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 2.5180244)
 
 [node name="GraffitiSpot" parent="." unique_id=635317721 instance=ExtResource("2_oi3di")]
 unique_name_in_owner = true
@@ -21,7 +28,12 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.6035142, 0, 0)
 [node name="Marker3D2" type="Marker3D" parent="." unique_id=1096975606]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.2210379, 0, 0)
 
-[node name="Camera3D" type="Camera3D" parent="." unique_id=1048917155]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 2.768946)
-
 [node name="Phone" parent="." unique_id=175310537 instance=ExtResource("3_oi3di")]
+unique_name_in_owner = true
+
+[node name="StaticBody3D" type="StaticBody3D" parent="." unique_id=1708495266]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.7621454, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D" unique_id=197503797]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.027224302, -0.14162731, -1.4094238)
+shape = SubResource("BoxShape3D_o483p")

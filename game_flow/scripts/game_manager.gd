@@ -87,6 +87,6 @@ func accept_mission(idx: int) -> void:
 
 
 func end_mission() -> void:
-	pass
+	print("END MISSION")
 
 #endregion
