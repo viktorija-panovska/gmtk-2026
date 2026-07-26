@@ -9,6 +9,12 @@ class_name CopNPC
 
 ## need 2 markers, car and drawing spot
 
+signal player_busted
+
+@export_group("Busted")
+@export var busted_radius: float = 2.0    # how close counts as "caught"
+@export var busted_time: float = 5.0      # how long within that radius before busted
+
 @onready var nav_agent: NavigationAgent3D = $NavigationAgent3D
 @onready var vision_cone: VisionCone3D = $VisionCone3D
 @onready var state_timer: Timer = $StateTimer
@@ -44,6 +50,9 @@ enum State {
 	CONFUSED,
 	RETURN_TO_CAR,
 }
+
+var _busted_proximity_time: float = 0.0
+var _busted: bool = false
 
 var state: State = State.IN_CAR
 var player: Node3D = null
@@ -179,7 +188,7 @@ func _on_body_hidden(body: Node3D) -> void:
 
 func _physics_process(_delta: float) -> void:
 	_apply_gravity(_delta)
-
+	_update_busted_check(_delta)
 	match state:
 		State.CHASE:
 			if player and player_currently_visible:
@@ -209,6 +218,31 @@ func _apply_gravity(delta: float) -> void:
 		velocity.y -= 20.0 * delta
 	else:
 		velocity.y = 0.0
+
+func _update_busted_check(delta: float) -> void:
+	if _busted:
+		return
+
+
+	if state != State.CHASE or player == null:
+		_busted_proximity_time = 0.0
+		return
+
+	var distance := global_position.distance_to(player.global_position)
+	if distance <= busted_radius:
+		_busted_proximity_time += delta
+		if _busted_proximity_time >= busted_time:
+			_trigger_busted()
+	else:
+		_busted_proximity_time = 0.0
+
+
+func _trigger_busted() -> void:
+	_busted = true
+	print("NPC: BUSTED")
+	player_busted.emit()
+
+	velocity = Vector3.ZERO
 
 
 func _stand_still() -> void:

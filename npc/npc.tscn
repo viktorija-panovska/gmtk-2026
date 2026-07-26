@@ -19,7 +19,11 @@ mesh = SubResource("CapsuleMesh_xxcha")
 shape = SubResource("CapsuleShape3D_kh24r")
 
 [node name="NavigationAgent3D" type="NavigationAgent3D" parent="." unique_id=2008744131]
-target_desired_distance = 1.5
+path_desired_distance = 3.0
+target_desired_distance = 3.0
+path_max_distance = 5.01
+avoidance_enabled = true
+radius = 1.0
 debug_enabled = true
 
 [node name="VisionCone3D" type="Area3D" parent="." unique_id=675379958 node_paths=PackedStringArray("vision_test_ignore_bodies")]

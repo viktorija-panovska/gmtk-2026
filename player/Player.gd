@@ -1,5 +1,7 @@
 extends CharacterBody3D
 
+
+
 @export var debug = false
 @export var speed = 6
 @export var SENSITIVITY = 0.004
