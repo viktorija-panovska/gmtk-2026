@@ -21,6 +21,10 @@ Inventory="*uid://clxx754b1ako6"
 GameManager="*uid://dgh5scrne2ski"
 SceneLoader="*uid://ba034yt0jm0x1"
 
+[debug]
+
+shapes/collision/shape_color=Color(0, 0.36078432, 0.69803923, 0.78431374)
+
 [file_customization]
 
 folder_colors={
