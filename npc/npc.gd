@@ -70,6 +70,8 @@ func _ready() -> void:
 	state_timer.one_shot = true
 	state_timer.timeout.connect(_on_state_timer_timeout)
 	_enter_state(State.IN_CAR)
+	floor_max_angle = deg_to_rad(100) #Snap Up Max Height
+	floor_snap_length = 0.2 #Snap Down Max Drop (before gravity sets in instead)
 
 ## notify cop if he is in car
 func notify_player_entered_drawing_area() -> void:
