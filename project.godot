@@ -24,6 +24,7 @@ SceneLoader="*uid://ba034yt0jm0x1"
 [file_customization]
 
 folder_colors={
+"res://Building Models/": "purple",
 "res://addons/": "gray",
 "res://drawing/": "pink",
 "res://game_flow/": "green",
