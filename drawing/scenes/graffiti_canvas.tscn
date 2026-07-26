@@ -2,13 +2,14 @@
 
 [ext_resource type="Script" uid="uid://c1fwi47kh64eq" path="res://drawing/scripts/graffiti_canvas.gd" id="1_5lmgc"]
 [ext_resource type="Texture2D" uid="uid://cgvchcvgwev2u" path="res://drawing/textures/smooth_brush_shape.webp" id="3_gryyh"]
-[ext_resource type="Texture2D" uid="uid://c8jrrpiyfvtu2" path="res://drawing/textures/drawable_texture.tres" id="3_mm5nj"]
+[ext_resource type="Texture2D" uid="uid://c8jrrpiyfvtu2" path="res://drawing/textures/drawable_texture1.tres" id="3_mm5nj"]
 [ext_resource type="Texture2D" uid="uid://eunhlm3j40c5" path="res://drawing/textures/black_spray_paint_can.png" id="4_afwnh"]
 [ext_resource type="Texture2D" uid="uid://vafxo7vwh50r" path="res://drawing/textures/black_spray_paint_can_cursor.png" id="4_j7aja"]
 [ext_resource type="Texture2D" uid="uid://cuxivgouswvgd" path="res://drawing/textures/red_spray_paint_can.png" id="5_f11qt"]
 [ext_resource type="Texture2D" uid="uid://jx8ylfqxijx1" path="res://drawing/textures/blue_spray_paint_can.png" id="6_f11qt"]
 [ext_resource type="Texture2D" uid="uid://cr2bnb631mcyt" path="res://drawing/textures/red_spray_paint_can_cursor.png" id="8_y0qqk"]
 [ext_resource type="Texture2D" uid="uid://c4cjvh8qoyiq7" path="res://drawing/textures/blue_spray_paint_can_cursor.png" id="9_4y31e"]
+[ext_resource type="Texture2D" uid="uid://coam10wk5rn2w" path="res://utilities/brick-wall.tga" id="10_ff6fo"]
 [ext_resource type="Texture2D" uid="uid://i003ypde4eqr" path="res://drawing/textures/stencil_test.png" id="10_y0qqk"]
 [ext_resource type="FontFile" uid="uid://c64h0y83mlq7n" path="res://utilities/DonGraffiti.otf" id="11_xl6o2"]
 
@@ -39,14 +40,20 @@ Color(1, 0, 0, 1): ExtResource("8_y0qqk"),
 Color(0, 0, 1, 1): ExtResource("9_4y31e")
 })
 
-[node name="Background" type="TextureRect" parent="." unique_id=1851942795]
-unique_name_in_owner = true
+[node name="BG" type="TextureRect" parent="." unique_id=871680253]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_left = -429.0
+offset_top = -188.0
+offset_right = 205.0
+offset_bottom = 188.0
 grow_horizontal = 2
 grow_vertical = 2
+texture = ExtResource("10_ff6fo")
+stretch_mode = 1
+flip_v = true
 
 [node name="DrawingTexture" type="TextureRect" parent="." unique_id=1789833365]
 unique_name_in_owner = true

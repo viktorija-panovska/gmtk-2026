@@ -5,7 +5,7 @@ const GROUPS_TOTAL: int = GROUPS_ONE_SIDE * GROUPS_ONE_SIDE
 const MAX_SCORE_PER_GROUP: int = 10
 
 
-class Scores:
+class PixelCounts:
 	var black: Array[int]
 	var red: Array[int]
 	var green: Array[int]
@@ -36,7 +36,7 @@ func compute_score() -> float:
 	drawing_img.resize(64, 64, Image.Interpolation.INTERPOLATE_NEAREST)
 	drawing_img.convert(Image.FORMAT_RGBA8)
 
-	var reference_img: Image = GameManager.get_reference_image().get_image()
+	var reference_img: Image = load("uid://ddg745x2g6ci7").get_image()#GameManager.get_reference_image().get_image()
 	reference_img.resize(64, 64, Image.Interpolation.INTERPOLATE_NEAREST)
 	reference_img.convert(Image.FORMAT_RGBA8)
 
@@ -46,10 +46,11 @@ func compute_score() -> float:
 		mask.resize(64, 64, Image.Interpolation.INTERPOLATE_NEAREST)
 		mask.convert(Image.FORMAT_RGBA8)
 
-	var scores: Array[Scores] = _count_pixels(drawing_img, reference_img, mask)
-	var group_score: float = _compute_raw_score(scores[0], scores[1])
+	var counts: Array[PixelCounts] = _count_pixels(drawing_img, reference_img, mask)
+	var group_score: float = _compute_raw_score(counts[0], counts[1])
 
-	return group_score / (GROUPS_TOTAL * MAX_SCORE_PER_GROUP * 4) * 100
+	print(group_score / (GROUPS_TOTAL * MAX_SCORE_PER_GROUP * 4) * 100)
+	return 0
 
 
 func compute_reward(score: float, max_reward: int) -> int:
@@ -58,9 +59,9 @@ func compute_reward(score: float, max_reward: int) -> int:
 	return roundi(max_reward / 2)
 
 
-func _count_pixels(drawing_img: Image, reference_img: Image, mask_img: Image) -> Array[Scores]:
-	var reference_scores: Scores = Scores.new()
-	var drawing_scores: Scores = Scores.new()
+func _count_pixels(drawing_img: Image, reference_img: Image, mask_img: Image) -> Array[PixelCounts]:
+	var reference_counts: PixelCounts = PixelCounts.new()
+	var drawing_counts: PixelCounts = PixelCounts.new()
 
 	var pixels_per_group: Vector2i = Vector2i(int(drawing_img.get_width() / GROUPS_ONE_SIDE), int(drawing_img.get_height() / GROUPS_ONE_SIDE))
 	_max_reference_score_per_group = pixels_per_group.x * pixels_per_group.y
@@ -72,41 +73,41 @@ func _count_pixels(drawing_img: Image, reference_img: Image, mask_img: Image) ->
 				continue
 			var index: int = int(y / pixels_per_group.y) * GROUPS_ONE_SIDE + int(x / pixels_per_group.x)
 			var reference_pixel: Color = reference_img.get_pixel(y, x)
-			_count_pixel_color(drawing_pixel, index, drawing_scores)
-			_count_pixel_color(reference_pixel, index, reference_scores)
+			_count_pixel_color(drawing_pixel, index, drawing_counts)
+			_count_pixel_color(reference_pixel, index, reference_counts)
 	
-	return [reference_scores, drawing_scores]
+	return [reference_counts, drawing_counts]
 
 
-func _compute_raw_score(reference_scores: Scores, drawing_scores: Scores) -> float:
+func _compute_raw_score(reference_counts: PixelCounts, drawing_counts: PixelCounts) -> float:
 	var score: float = 0
 
-	print(" ref: ", reference_scores.black, " draw: ", drawing_scores.black)
+	print(" ref: ", reference_counts.black, " draw: ", drawing_counts.black)
 	for i in range(GROUPS_TOTAL):
-		var black: float = _compute_one_dimensional_score(reference_scores.black[i], drawing_scores.black[i])
-		var red: float = _compute_one_dimensional_score(reference_scores.red[i], drawing_scores.red[i])
-		var green: float = _compute_one_dimensional_score(reference_scores.green[i], drawing_scores.green[i])
-		var blue: float = _compute_one_dimensional_score(reference_scores.blue[i], drawing_scores.blue[i])
+		var black: float = _compute_one_dimensional_score(reference_counts.black[i], drawing_counts.black[i])
+		var red: float = _compute_one_dimensional_score(reference_counts.red[i], drawing_counts.red[i])
+		var green: float = _compute_one_dimensional_score(reference_counts.green[i], drawing_counts.green[i])
+		var blue: float = _compute_one_dimensional_score(reference_counts.blue[i], drawing_counts.blue[i])
 		var group_score = black + red + green + blue
 		score += group_score
 
 	return score
 
 
-func _compute_one_dimensional_score(reference_score: int, drawing_score: int) -> float:
-	if reference_score == drawing_score:
+func _compute_one_dimensional_score(reference_counts: int, drawing_counts: int) -> float:
+	if reference_counts == drawing_counts:
 		return MAX_SCORE_PER_GROUP
 
 	print(_max_reference_score_per_group)
 	print("---")
-	print(drawing_score)
-	print(reference_score)
-	print(abs(drawing_score - reference_score) / _max_reference_score_per_group)
-	print(_scoring_curve.sample(abs(drawing_score - reference_score) / _max_reference_score_per_group))
-	return _scoring_curve.sample(abs(drawing_score - reference_score) / _max_reference_score_per_group) * MAX_SCORE_PER_GROUP
+	print(drawing_counts)
+	print(reference_counts)
+	print(abs(drawing_counts - reference_counts) / _max_reference_score_per_group)
+	print(_scoring_curve.sample(abs(drawing_counts - reference_counts) / _max_reference_score_per_group))
+	return _scoring_curve.sample(abs(drawing_counts - reference_counts) / _max_reference_score_per_group) * MAX_SCORE_PER_GROUP
 
 
-func _count_pixel_color(pixel: Color, index: int, scores: Scores) -> void:
+func _count_pixel_color(pixel: Color, index: int, scores: PixelCounts) -> void:
 	if pixel.a == 0: return
 
 	if _is_pixel_black(pixel):

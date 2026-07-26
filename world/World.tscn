@@ -1,11 +1,37 @@
 [gd_scene format=3 uid="uid://db2h3t17k37pe"]
 
+[ext_resource type="Script" uid="uid://dodglx38vlsj0" path="res://world/scripts/level_manager.gd" id="1_crsqw"]
 [ext_resource type="Texture2D" uid="uid://bu2xhx6ovwqvv" path="res://world/Materials/blue_lagoon_night_2k.exr" id="1_txrfu"]
 [ext_resource type="PackedScene" uid="uid://dihp3sy40mje7" path="res://player/Player.tscn" id="5_0n6y5"]
 [ext_resource type="PackedScene" uid="uid://csxwcph0ohjtn" path="res://world/misc/police-car.glb" id="5_0wlj7"]
 [ext_resource type="Script" uid="uid://b0tg77hwc7h4n" path="res://world/drawing_zone_box.gd" id="6_gqh78"]
+[ext_resource type="PackedScene" uid="uid://m7dbvnk1qkd7" path="res://game_flow/scenes/pause_menu.tscn" id="7_dodpj"]
 [ext_resource type="PackedScene" uid="uid://c0cpoca7xppi" path="res://npc/npc.tscn" id="7_qpjny"]
 [ext_resource type="PackedScene" uid="uid://dh05jks8m7nhb" path="res://world/mesh_navigation_region_3d_2.tscn" id="8_txrfu"]
+[ext_resource type="PackedScene" uid="uid://yo1fhj3ry2ou" path="res://drawing/scenes/graffiti_spot.tscn" id="8_x3yhk"]
+[ext_resource type="PackedScene" uid="uid://dcql52mmn7msp" path="res://game_flow/scenes/phone.tscn" id="9_8mymi"]
+[ext_resource type="Shader" uid="uid://xo3quejyuxex" path="res://drawing/textures/drawn_texture_apply.gdshader" id="9_8u1wm"]
+[ext_resource type="Texture2D" uid="uid://cmta1jh7qlqo0" path="res://drawing/textures/drawable_texture3.tres" id="10_x3yhk"]
+[ext_resource type="Script" uid="uid://cl8h4mf8lygkp" path="res://drawing/scripts/graffiti_spot.gd" id="11_6ogeo"]
+[ext_resource type="Texture2D" uid="uid://c8jrrpiyfvtu2" path="res://drawing/textures/drawable_texture1.tres" id="11_ww6ps"]
+[ext_resource type="Texture2D" uid="uid://dlr1bqc3jdeai" path="res://drawing/textures/drawable_texture2.tres" id="12_8u1wm"]
+[ext_resource type="Texture2D" uid="uid://i003ypde4eqr" path="res://drawing/textures/stencil_test.png" id="12_ortil"]
+[ext_resource type="ArrayMesh" uid="uid://biehht0un30xl" path="res://drawing/models/black_can.tres" id="14_e08lr"]
+[ext_resource type="Texture2D" uid="uid://bo6n8fpfn2p6y" path="res://drawing/textures/drawable_texture4.tres" id="14_ww6ps"]
+[ext_resource type="Script" uid="uid://c1fwi47kh64eq" path="res://drawing/scripts/graffiti_canvas.gd" id="15_kdue7"]
+[ext_resource type="Texture2D" uid="uid://dpxee6ao3kyva" path="res://drawing/textures/drawable_texture5.tres" id="15_ortil"]
+[ext_resource type="Texture2D" uid="uid://dvglofm6gdf7k" path="res://drawing/textures/drawable_texture6.tres" id="16_ortil"]
+[ext_resource type="Texture2D" uid="uid://cgvchcvgwev2u" path="res://drawing/textures/smooth_brush_shape.webp" id="16_ppjuv"]
+[ext_resource type="Texture2D" uid="uid://eunhlm3j40c5" path="res://drawing/textures/black_spray_paint_can.png" id="17_dh4u6"]
+[ext_resource type="Texture2D" uid="uid://cuxivgouswvgd" path="res://drawing/textures/red_spray_paint_can.png" id="18_v1qdb"]
+[ext_resource type="Texture2D" uid="uid://jx8ylfqxijx1" path="res://drawing/textures/blue_spray_paint_can.png" id="19_u0m3f"]
+[ext_resource type="Texture2D" uid="uid://vafxo7vwh50r" path="res://drawing/textures/black_spray_paint_can_cursor.png" id="20_xcj6q"]
+[ext_resource type="Texture2D" uid="uid://cr2bnb631mcyt" path="res://drawing/textures/red_spray_paint_can_cursor.png" id="21_rnc6a"]
+[ext_resource type="Texture2D" uid="uid://c4cjvh8qoyiq7" path="res://drawing/textures/blue_spray_paint_can_cursor.png" id="22_1b1jl"]
+[ext_resource type="Texture2D" uid="uid://coam10wk5rn2w" path="res://utilities/brick-wall.tga" id="23_slova"]
+[ext_resource type="FontFile" uid="uid://c64h0y83mlq7n" path="res://utilities/DonGraffiti.otf" id="24_spsmc"]
+[ext_resource type="Script" uid="uid://b01qte8xyti8g" path="res://world/exit.gd" id="31_e08lr"]
+[ext_resource type="PackedScene" uid="uid://c2udup3lclvr8" path="res://drawing/scenes/score_screen.tscn" id="32_kdue7"]
 
 [sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_r5bxx"]
 panorama = ExtResource("1_txrfu")
@@ -28,7 +54,150 @@ volumetric_fog_emission = Color(0.014211937, 3.619207e-09, 1.1280645e-09, 1)
 [sub_resource type="BoxShape3D" id="BoxShape3D_q2d71"]
 size = Vector3(5.156006, 3.593872, 7.1851654)
 
+[sub_resource type="BoxShape3D" id="BoxShape3D_tx47m"]
+size = Vector3(2.9347076, 2.6842957, 1.9945984)
+
+[sub_resource type="Shader" id="Shader_tx47m"]
+code = "shader_type spatial;
+
+uniform sampler2D drawing_tex;
+uniform sampler2D stencil_tex;
+uniform bool use_stencil;
+
+void fragment() {
+	vec4 drawing = texture(drawing_tex, UV);
+	if (drawing.a != 0.0 && (!use_stencil || texture(stencil_tex, UV) != vec4(1, 1, 1, 1)))
+		ALBEDO = drawing.rgb;
+	else
+		ALPHA = 0.0;
+}"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_fy8qs"]
+render_priority = 0
+shader = SubResource("Shader_tx47m")
+shader_parameter/drawing_tex = ExtResource("11_ww6ps")
+shader_parameter/stencil_tex = ExtResource("12_ortil")
+shader_parameter/use_stencil = false
+
+[sub_resource type="QuadMesh" id="QuadMesh_pbtp0"]
+material = SubResource("ShaderMaterial_fy8qs")
+size = Vector2(2.5, 2)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_3j5ad"]
+render_priority = 0
+shader = ExtResource("9_8u1wm")
+shader_parameter/drawing_tex = ExtResource("12_8u1wm")
+shader_parameter/stencil_tex = ExtResource("12_ortil")
+shader_parameter/use_stencil = false
+
+[sub_resource type="QuadMesh" id="QuadMesh_vqsdb"]
+material = SubResource("ShaderMaterial_3j5ad")
+size = Vector2(2.5, 2)
+
+[sub_resource type="Animation" id="Animation_livfm"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Indicator:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(-0.35782, -0.2100483, -0.22195897)]
+}
+
+[sub_resource type="Animation" id="Animation_6ugl6"]
+resource_name = "SpinCan"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Indicator:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5, 1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector3(-0.3577925, 0, -0.22165681), Vector3(-0.3577925, 3.1415927, -0.22165681), Vector3(-0.3577925, 6.2831855, -0.22165681)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_w6608"]
+_data = {
+&"RESET": SubResource("Animation_livfm"),
+&"SpinCan": SubResource("Animation_6ugl6")
+}
+
+[sub_resource type="LabelSettings" id="LabelSettings_o483p"]
+font = ExtResource("24_spsmc")
+font_size = 30
+font_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_ne8ba"]
+font = ExtResource("24_spsmc")
+font_size = 60
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_rteg8"]
+render_priority = 0
+shader = ExtResource("9_8u1wm")
+shader_parameter/drawing_tex = ExtResource("10_x3yhk")
+shader_parameter/stencil_tex = ExtResource("12_ortil")
+shader_parameter/use_stencil = false
+
+[sub_resource type="QuadMesh" id="QuadMesh_ph6wr"]
+material = SubResource("ShaderMaterial_rteg8")
+size = Vector2(2.5, 2)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_j21dl"]
+render_priority = 0
+shader = ExtResource("9_8u1wm")
+shader_parameter/drawing_tex = ExtResource("14_ww6ps")
+shader_parameter/stencil_tex = ExtResource("12_ortil")
+shader_parameter/use_stencil = false
+
+[sub_resource type="QuadMesh" id="QuadMesh_fy8qs"]
+material = SubResource("ShaderMaterial_j21dl")
+size = Vector2(2.5, 2)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_lcdy5"]
+render_priority = 0
+shader = ExtResource("9_8u1wm")
+shader_parameter/drawing_tex = ExtResource("15_ortil")
+shader_parameter/stencil_tex = ExtResource("12_ortil")
+shader_parameter/use_stencil = false
+
+[sub_resource type="QuadMesh" id="QuadMesh_c81jk"]
+material = SubResource("ShaderMaterial_lcdy5")
+size = Vector2(2, 1.5)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_tx47m"]
+render_priority = 0
+shader = ExtResource("9_8u1wm")
+shader_parameter/drawing_tex = ExtResource("16_ortil")
+shader_parameter/stencil_tex = ExtResource("12_ortil")
+shader_parameter/use_stencil = false
+
+[sub_resource type="QuadMesh" id="QuadMesh_3j5ad"]
+material = SubResource("ShaderMaterial_tx47m")
+size = Vector2(2.5, 2)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_o483p"]
+size = Vector3(14, 8, 5)
+
+[sub_resource type="TextMesh" id="TextMesh_o483p"]
+text = "EXIT"
+font_size = 127
+uppercase = true
+
+[sub_resource type="LabelSettings" id="LabelSettings_e08lr"]
+font = ExtResource("24_spsmc")
+font_size = 60
+
 [node name="World" type="Node3D" unique_id=2035164048]
+script = ExtResource("1_crsqw")
 
 [node name="Map" type="Node3D" parent="." unique_id=1973145389]
 
@@ -36,7 +205,7 @@ size = Vector3(5.156006, 3.593872, 7.1851654)
 environment = SubResource("Environment_g2h84")
 
 [node name="Player" parent="." unique_id=573086008 instance=ExtResource("5_0n6y5")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 122.42078, 1.3936877, 16.62716)
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 230.73831, -0.88087606, -98.14703)
 speed = 12
 
 [node name="DrawingSiteSpot" type="Area3D" parent="." unique_id=327733371 node_paths=PackedStringArray("cop")]
@@ -67,41 +236,676 @@ transform = Transform3D(0.23676026, 0, -1.9859366, 0, 2, 0, 1.9859366, 0, 0.2367
 
 [node name="MESH NavigationRegion3D2" parent="." unique_id=1700014943 instance=ExtResource("8_txrfu")]
 
-[node name="Graffiti spot 1" type="Marker3D" parent="." unique_id=305843228]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -196.43855, 1.7131796, -10.265059)
+[node name="GraffitiSpot1" parent="." unique_id=635317721 instance=ExtResource("8_x3yhk")]
+unique_name_in_owner = true
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -197.53362, 1.7131796, -10.265059)
 
-[node name="Cop Spot 1" type="Marker3D" parent="Graffiti spot 1" unique_id=949454637]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 157.68817, 0, -47.992027)
+[node name="DetectionArea" parent="GraffitiSpot1" index="0" unique_id=2056115252]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.040611267, -0.13664246, 0.944046)
+shape = SubResource("BoxShape3D_tx47m")
 
-[node name="Graffiti spot 2" type="Marker3D" parent="." unique_id=886061785]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -197.54453, 2.0246847, 107.41136)
+[node name="GraffitiWall" parent="GraffitiSpot1" index="1" unique_id=1509438525]
+mesh = SubResource("QuadMesh_pbtp0")
 
-[node name="Cop Spot 2" type="Marker3D" parent="Graffiti spot 2" unique_id=644521518]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 59.650024, -0.31150508, -120.55622)
+[node name="Indicator" parent="GraffitiSpot1" index="2" unique_id=1828264155]
+transform = Transform3D(0.09379521, 0.05730742, -0.019530084, -0.020619778, 0.18273689, 0.035023313, 0.02787981, -0.057646263, 0.091607556, 0, -0.077862024, 0.9181366)
 
-[node name="Graffiti spot 3" type="Marker3D" parent="." unique_id=1520757928]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -94.36554, 1.1679268, 28.265276)
+[node name="GraffitiSpot2" type="Area3D" parent="." unique_id=1937878563]
+unique_name_in_owner = true
+transform = Transform3D(-1, 0, -1.509958e-07, 0, 1, 0, 1.509958e-07, 0, -1, -197.54453, 1.5578761, 109.28274)
+script = ExtResource("11_6ogeo")
 
-[node name="Cop Spot 2" type="Marker3D" parent="Graffiti spot 3" unique_id=1110519054]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 159.48834, -0.31150508, -52.350803)
+[node name="DetectionArea" type="CollisionShape3D" parent="GraffitiSpot2" unique_id=698033775]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.040611267, -0.13664246, 0.944046)
+shape = SubResource("BoxShape3D_tx47m")
 
-[node name="Graffiti spot 4" type="Marker3D" parent="." unique_id=65958835]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -70.33544, 5.555504, -57.433533)
+[node name="GraffitiWall" type="MeshInstance3D" parent="GraffitiSpot2" unique_id=656705448]
+unique_name_in_owner = true
+mesh = SubResource("QuadMesh_vqsdb")
 
-[node name="Cop Spot 2" type="Marker3D" parent="Graffiti spot 4" unique_id=1697525403]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 111.60575, -4.352934, 123.899666)
+[node name="Indicator" type="MeshInstance3D" parent="GraffitiSpot2" unique_id=118094622]
+transform = Transform3D(0.09379521, 0.057307426, -0.019530086, -0.020619778, 0.18273692, 0.03502332, 0.02787981, -0.05764627, 0.09160757, 0, -0.077862024, 0.9181366)
+mesh = ExtResource("14_e08lr")
 
-[node name="Graffiti spot 5" type="Marker3D" parent="." unique_id=397292183]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 166.19643, 1.3138535, -53.089787)
+[node name="AnimationPlayer" type="AnimationPlayer" parent="GraffitiSpot2" unique_id=1280825801]
+libraries/ = SubResource("AnimationLibrary_w6608")
+autoplay = &"SpinCan"
 
-[node name="Cop Spot 3" type="Marker3D" parent="Graffiti spot 5" unique_id=1789519107]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -124.92612, -0.11128354, 119.55592)
+[node name="Canvas" type="Control" parent="GraffitiSpot2" unique_id=2064535663]
+unique_name_in_owner = true
+process_mode = 4
+visible = false
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("15_kdue7")
+_drawable_texture = ExtResource("12_8u1wm")
+_brush_texture = ExtResource("16_ppjuv")
+_default_spray_can_texture = ExtResource("17_dh4u6")
+_spray_can_textures = Dictionary[Color, Texture2D]({
+Color(0, 0, 0, 1): ExtResource("17_dh4u6"),
+Color(1, 0, 0, 1): ExtResource("18_v1qdb"),
+Color(0, 0, 1, 1): ExtResource("19_u0m3f")
+})
+_cursor_textures = Dictionary[Color, Texture2D]({
+Color(0, 0, 0, 1): ExtResource("20_xcj6q"),
+Color(1, 0, 0, 1): ExtResource("21_rnc6a"),
+Color(0, 0, 1, 1): ExtResource("22_1b1jl")
+})
 
-[node name="Graffiti spot 6" type="Marker3D" parent="." unique_id=1993949076]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 108.26037, 1.3138535, 39.31097)
+[node name="BG" type="TextureRect" parent="GraffitiSpot2/Canvas" unique_id=871680253]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -429.0
+offset_top = -188.0
+offset_right = 205.0
+offset_bottom = 188.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("23_slova")
+stretch_mode = 1
+flip_v = true
 
-[node name="Cop Spot 4" type="Marker3D" parent="Graffiti spot 6" unique_id=862911088]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -150.62296, -0.11128354, -94.934074)
+[node name="DrawingTexture" type="TextureRect" parent="GraffitiSpot2/Canvas" unique_id=1789833365]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("12_8u1wm")
+
+[node name="Stencil" type="TextureRect" parent="GraffitiSpot2/Canvas" unique_id=521882559]
+unique_name_in_owner = true
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("12_ortil")
+
+[node name="ColorContainer" type="HBoxContainer" parent="GraffitiSpot2/Canvas" unique_id=326418370]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -59.0
+offset_bottom = 69.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="Label" type="Label" parent="GraffitiSpot2/Canvas" unique_id=497447173]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -287.0
+offset_top = 16.0
+offset_right = -16.0
+offset_bottom = 46.0
+grow_horizontal = 0
+text = "Press E TO CLOSE CANVAS"
+label_settings = SubResource("LabelSettings_o483p")
+
+[node name="Prompt" type="Label" parent="GraffitiSpot2" unique_id=740218080]
+unique_name_in_owner = true
+visible = false
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -285.0
+offset_top = -54.25
+offset_right = 285.0
+offset_bottom = 54.25
+grow_horizontal = 2
+grow_vertical = 2
+text = "Press E to start drawing"
+label_settings = SubResource("LabelSettings_ne8ba")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="GraffitiSpot3" type="Area3D" parent="." unique_id=431476747]
+unique_name_in_owner = true
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, -94.36554, 1.3490195, 29.559557)
+script = ExtResource("11_6ogeo")
+
+[node name="DetectionArea" type="CollisionShape3D" parent="GraffitiSpot3" unique_id=9443225]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.040611267, -0.13664246, 0.944046)
+shape = SubResource("BoxShape3D_tx47m")
+
+[node name="GraffitiWall" type="MeshInstance3D" parent="GraffitiSpot3" unique_id=1334125606]
+mesh = SubResource("QuadMesh_ph6wr")
+
+[node name="Indicator" type="MeshInstance3D" parent="GraffitiSpot3" unique_id=132097691]
+transform = Transform3D(0.09379521, 0.05730742, -0.019530084, -0.020619778, 0.18273689, 0.035023313, 0.02787981, -0.057646263, 0.091607556, 0, -0.077862024, 0.9181366)
+mesh = ExtResource("14_e08lr")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="GraffitiSpot3" unique_id=1729240354]
+libraries/ = SubResource("AnimationLibrary_w6608")
+autoplay = &"SpinCan"
+
+[node name="Canvas" type="Control" parent="GraffitiSpot3" unique_id=1219864221]
+process_mode = 4
+visible = false
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("15_kdue7")
+_drawable_texture = ExtResource("10_x3yhk")
+_brush_texture = ExtResource("16_ppjuv")
+_default_spray_can_texture = ExtResource("17_dh4u6")
+_spray_can_textures = Dictionary[Color, Texture2D]({
+Color(0, 0, 0, 1): ExtResource("17_dh4u6"),
+Color(1, 0, 0, 1): ExtResource("18_v1qdb"),
+Color(0, 0, 1, 1): ExtResource("19_u0m3f")
+})
+_cursor_textures = Dictionary[Color, Texture2D]({
+Color(0, 0, 0, 1): ExtResource("20_xcj6q"),
+Color(1, 0, 0, 1): ExtResource("21_rnc6a"),
+Color(0, 0, 1, 1): ExtResource("22_1b1jl")
+})
+
+[node name="BG" type="TextureRect" parent="GraffitiSpot3/Canvas" unique_id=939181712]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -429.0
+offset_top = -188.0
+offset_right = 205.0
+offset_bottom = 188.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("23_slova")
+stretch_mode = 1
+flip_v = true
+
+[node name="DrawingTexture" type="TextureRect" parent="GraffitiSpot3/Canvas" unique_id=1593160246]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("10_x3yhk")
+
+[node name="Stencil" type="TextureRect" parent="GraffitiSpot3/Canvas" unique_id=715175233]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("12_ortil")
+
+[node name="ColorContainer" type="HBoxContainer" parent="GraffitiSpot3/Canvas" unique_id=1314337953]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -59.0
+offset_bottom = 69.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="Label" type="Label" parent="GraffitiSpot3/Canvas" unique_id=167099967]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -287.0
+offset_top = 16.0
+offset_right = -16.0
+offset_bottom = 46.0
+grow_horizontal = 0
+text = "Press E TO CLOSE CANVAS"
+label_settings = SubResource("LabelSettings_o483p")
+
+[node name="Prompt" type="Label" parent="GraffitiSpot3" unique_id=1310222837]
+visible = false
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -285.0
+offset_top = -54.25
+offset_right = 285.0
+offset_bottom = 54.25
+grow_horizontal = 2
+grow_vertical = 2
+text = "Press E to start drawing"
+label_settings = SubResource("LabelSettings_ne8ba")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="GraffitiSpot4" type="Area3D" parent="." unique_id=333440096]
+unique_name_in_owner = true
+transform = Transform3D(0.5519369, 0, -0.8338858, 0, 1, 0, 0.8338858, 0, 0.5519369, -69.742096, 5.555504, -57.992584)
+script = ExtResource("11_6ogeo")
+
+[node name="DetectionArea" type="CollisionShape3D" parent="GraffitiSpot4" unique_id=82340463]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.040611267, -0.13664246, 0.944046)
+shape = SubResource("BoxShape3D_tx47m")
+
+[node name="GraffitiWall" type="MeshInstance3D" parent="GraffitiSpot4" unique_id=1398800921]
+mesh = SubResource("QuadMesh_fy8qs")
+
+[node name="Indicator" type="MeshInstance3D" parent="GraffitiSpot4" unique_id=552211615]
+transform = Transform3D(0.09379521, 0.057307426, -0.019530086, -0.020619778, 0.18273692, 0.03502332, 0.02787981, -0.05764627, 0.09160757, 0, -0.077862024, 0.9181366)
+mesh = ExtResource("14_e08lr")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="GraffitiSpot4" unique_id=412884618]
+libraries/ = SubResource("AnimationLibrary_w6608")
+autoplay = &"SpinCan"
+
+[node name="Canvas" type="Control" parent="GraffitiSpot4" unique_id=1732476266]
+process_mode = 4
+visible = false
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("15_kdue7")
+_drawable_texture = ExtResource("14_ww6ps")
+_brush_texture = ExtResource("16_ppjuv")
+_default_spray_can_texture = ExtResource("17_dh4u6")
+_spray_can_textures = Dictionary[Color, Texture2D]({
+Color(0, 0, 0, 1): ExtResource("17_dh4u6"),
+Color(1, 0, 0, 1): ExtResource("18_v1qdb"),
+Color(0, 0, 1, 1): ExtResource("19_u0m3f")
+})
+_cursor_textures = Dictionary[Color, Texture2D]({
+Color(0, 0, 0, 1): ExtResource("20_xcj6q"),
+Color(1, 0, 0, 1): ExtResource("21_rnc6a"),
+Color(0, 0, 1, 1): ExtResource("22_1b1jl")
+})
+
+[node name="BG" type="TextureRect" parent="GraffitiSpot4/Canvas" unique_id=1469059638]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -429.0
+offset_top = -188.0
+offset_right = 205.0
+offset_bottom = 188.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("23_slova")
+stretch_mode = 1
+flip_v = true
+
+[node name="DrawingTexture" type="TextureRect" parent="GraffitiSpot4/Canvas" unique_id=1122320116]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("14_ww6ps")
+
+[node name="Stencil" type="TextureRect" parent="GraffitiSpot4/Canvas" unique_id=555839879]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("12_ortil")
+
+[node name="ColorContainer" type="HBoxContainer" parent="GraffitiSpot4/Canvas" unique_id=1419000788]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -59.0
+offset_bottom = 69.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="Label" type="Label" parent="GraffitiSpot4/Canvas" unique_id=1305636591]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -287.0
+offset_top = 16.0
+offset_right = -16.0
+offset_bottom = 46.0
+grow_horizontal = 0
+text = "Press E TO CLOSE CANVAS"
+label_settings = SubResource("LabelSettings_o483p")
+
+[node name="Prompt" type="Label" parent="GraffitiSpot4" unique_id=1713680342]
+visible = false
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -285.0
+offset_top = -54.25
+offset_right = 285.0
+offset_bottom = 54.25
+grow_horizontal = 2
+grow_vertical = 2
+text = "Press E to start drawing"
+label_settings = SubResource("LabelSettings_ne8ba")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="GraffitiSpot5" type="Area3D" parent="." unique_id=1698428765]
+unique_name_in_owner = true
+transform = Transform3D(-4.371138e-08, 0, 0.9999998, 0, 1, 0, -0.9999998, 0, -4.371138e-08, 165.75307, 1.3138535, -52.954445)
+script = ExtResource("11_6ogeo")
+
+[node name="DetectionArea" type="CollisionShape3D" parent="GraffitiSpot5" unique_id=242100508]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.040611267, -0.13664246, 0.944046)
+shape = SubResource("BoxShape3D_tx47m")
+
+[node name="GraffitiWall" type="MeshInstance3D" parent="GraffitiSpot5" unique_id=1618092130]
+mesh = SubResource("QuadMesh_c81jk")
+
+[node name="Indicator" type="MeshInstance3D" parent="GraffitiSpot5" unique_id=1981636581]
+transform = Transform3D(0.09379521, 0.05730742, -0.019530084, -0.020619778, 0.18273689, 0.035023313, 0.02787981, -0.057646263, 0.091607556, 0, -0.077862024, 0.9181366)
+mesh = ExtResource("14_e08lr")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="GraffitiSpot5" unique_id=218605046]
+libraries/ = SubResource("AnimationLibrary_w6608")
+autoplay = &"SpinCan"
+
+[node name="Canvas" type="Control" parent="GraffitiSpot5" unique_id=499998604]
+process_mode = 4
+visible = false
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("15_kdue7")
+_drawable_texture = ExtResource("15_ortil")
+_brush_texture = ExtResource("16_ppjuv")
+_default_spray_can_texture = ExtResource("17_dh4u6")
+_spray_can_textures = Dictionary[Color, Texture2D]({
+Color(0, 0, 0, 1): ExtResource("17_dh4u6"),
+Color(1, 0, 0, 1): ExtResource("18_v1qdb"),
+Color(0, 0, 1, 1): ExtResource("19_u0m3f")
+})
+_cursor_textures = Dictionary[Color, Texture2D]({
+Color(0, 0, 0, 1): ExtResource("20_xcj6q"),
+Color(1, 0, 0, 1): ExtResource("21_rnc6a"),
+Color(0, 0, 1, 1): ExtResource("22_1b1jl")
+})
+
+[node name="BG" type="TextureRect" parent="GraffitiSpot5/Canvas" unique_id=1405851626]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -429.0
+offset_top = -188.0
+offset_right = 205.0
+offset_bottom = 188.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("23_slova")
+stretch_mode = 1
+flip_v = true
+
+[node name="DrawingTexture" type="TextureRect" parent="GraffitiSpot5/Canvas" unique_id=1360744019]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("15_ortil")
+
+[node name="Stencil" type="TextureRect" parent="GraffitiSpot5/Canvas" unique_id=2043878967]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("12_ortil")
+
+[node name="ColorContainer" type="HBoxContainer" parent="GraffitiSpot5/Canvas" unique_id=1171021391]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -59.0
+offset_bottom = 69.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="Label" type="Label" parent="GraffitiSpot5/Canvas" unique_id=751718590]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -287.0
+offset_top = 16.0
+offset_right = -16.0
+offset_bottom = 46.0
+grow_horizontal = 0
+text = "Press E TO CLOSE CANVAS"
+label_settings = SubResource("LabelSettings_o483p")
+
+[node name="Prompt" type="Label" parent="GraffitiSpot5" unique_id=860069424]
+visible = false
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -285.0
+offset_top = -54.25
+offset_right = 285.0
+offset_bottom = 54.25
+grow_horizontal = 2
+grow_vertical = 2
+text = "Press E to start drawing"
+label_settings = SubResource("LabelSettings_ne8ba")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="GraffitiSpot6" type="Area3D" parent="." unique_id=797851797]
+unique_name_in_owner = true
+transform = Transform3D(-4.3711385e-08, 0, 0.99999994, 0, 1, 0, -0.99999994, 0, -4.3711385e-08, 107.47912, 1.3138535, 39.31097)
+script = ExtResource("11_6ogeo")
+
+[node name="DetectionArea" type="CollisionShape3D" parent="GraffitiSpot6" unique_id=1256898527]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.040611267, -0.13664246, 0.944046)
+shape = SubResource("BoxShape3D_tx47m")
+
+[node name="GraffitiWall" type="MeshInstance3D" parent="GraffitiSpot6" unique_id=1023806896]
+mesh = SubResource("QuadMesh_3j5ad")
+
+[node name="Indicator" type="MeshInstance3D" parent="GraffitiSpot6" unique_id=1234202154]
+transform = Transform3D(0.09379521, 0.05730742, -0.019530084, -0.020619778, 0.18273689, 0.035023313, 0.02787981, -0.057646263, 0.091607556, 0, -0.077862024, 0.9181366)
+mesh = ExtResource("14_e08lr")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="GraffitiSpot6" unique_id=58615514]
+libraries/ = SubResource("AnimationLibrary_w6608")
+autoplay = &"SpinCan"
+
+[node name="Canvas" type="Control" parent="GraffitiSpot6" unique_id=1634582219]
+process_mode = 4
+visible = false
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("15_kdue7")
+_drawable_texture = ExtResource("16_ortil")
+_brush_texture = ExtResource("16_ppjuv")
+_default_spray_can_texture = ExtResource("17_dh4u6")
+_spray_can_textures = Dictionary[Color, Texture2D]({
+Color(0, 0, 0, 1): ExtResource("17_dh4u6"),
+Color(1, 0, 0, 1): ExtResource("18_v1qdb"),
+Color(0, 0, 1, 1): ExtResource("19_u0m3f")
+})
+_cursor_textures = Dictionary[Color, Texture2D]({
+Color(0, 0, 0, 1): ExtResource("20_xcj6q"),
+Color(1, 0, 0, 1): ExtResource("21_rnc6a"),
+Color(0, 0, 1, 1): ExtResource("22_1b1jl")
+})
+
+[node name="BG" type="TextureRect" parent="GraffitiSpot6/Canvas" unique_id=1565375109]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -429.0
+offset_top = -188.0
+offset_right = 205.0
+offset_bottom = 188.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("23_slova")
+stretch_mode = 1
+flip_v = true
+
+[node name="DrawingTexture" type="TextureRect" parent="GraffitiSpot6/Canvas" unique_id=485507644]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("16_ortil")
+
+[node name="Stencil" type="TextureRect" parent="GraffitiSpot6/Canvas" unique_id=285878677]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("12_ortil")
+
+[node name="ColorContainer" type="HBoxContainer" parent="GraffitiSpot6/Canvas" unique_id=2009495386]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -59.0
+offset_bottom = 69.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="Label" type="Label" parent="GraffitiSpot6/Canvas" unique_id=308383660]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -287.0
+offset_top = 16.0
+offset_right = -16.0
+offset_bottom = 46.0
+grow_horizontal = 0
+text = "Press E TO CLOSE CANVAS"
+label_settings = SubResource("LabelSettings_o483p")
+
+[node name="Prompt" type="Label" parent="GraffitiSpot6" unique_id=1632739454]
+visible = false
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -285.0
+offset_top = -54.25
+offset_right = 285.0
+offset_bottom = 54.25
+grow_horizontal = 2
+grow_vertical = 2
+text = "Press E to start drawing"
+label_settings = SubResource("LabelSettings_ne8ba")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="PauseMenu" parent="." unique_id=1003388130 instance=ExtResource("7_dodpj")]
+visible = false
+_level_mouse_mode = 2
+
+[node name="Phone" parent="." unique_id=175310537 instance=ExtResource("9_8mymi")]
+unique_name_in_owner = true
+
+[node name="Exit" type="Area3D" parent="." unique_id=819588083]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 235.69873, -0.88087606, -99.296875)
+collision_layer = 0
+collision_mask = 2
+script = ExtResource("31_e08lr")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Exit" unique_id=235553479]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.5, 0.5, -6)
+shape = SubResource("BoxShape3D_o483p")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Exit" unique_id=658179453]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.1649475, 6.017423, -7.4058075)
+mesh = SubResource("TextMesh_o483p")
+
+[node name="ExitPrompt" type="Label" parent="Exit" unique_id=924100237]
+unique_name_in_owner = true
+visible = false
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -285.0
+offset_top = -54.25
+offset_right = 285.0
+offset_bottom = 54.25
+grow_horizontal = 2
+grow_vertical = 2
+text = "Press E to leave"
+label_settings = SubResource("LabelSettings_e08lr")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ScoreScreen" parent="Exit" unique_id=881119054 instance=ExtResource("32_kdue7")]
+unique_name_in_owner = true
+
+[connection signal="body_entered" from="Exit" to="Exit" method="_on_body_entered"]
+[connection signal="body_exited" from="Exit" to="Exit" method="_on_body_exited"]
 
 [editable path="MESH NavigationRegion3D2"]
 [editable path="MESH NavigationRegion3D2/bridge"]
@@ -946,3 +1750,4 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -150.62296, -0.11128354, -94.
 [editable path="MESH NavigationRegion3D2/misc/pallet5"]
 [editable path="MESH NavigationRegion3D2/misc/pallet6"]
 [editable path="MESH NavigationRegion3D2/misc/pallet8"]
+[editable path="GraffitiSpot1"]

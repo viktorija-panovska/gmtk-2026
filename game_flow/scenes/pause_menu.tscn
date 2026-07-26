@@ -1,0 +1,93 @@
+[gd_scene format=3 uid="uid://m7dbvnk1qkd7"]
+
+[ext_resource type="Script" uid="uid://fsb5rcwsdt1r" path="res://game_flow/scripts/pause_menu.gd" id="1_jgg3t"]
+[ext_resource type="Texture2D" uid="uid://coam10wk5rn2w" path="res://utilities/brick-wall.tga" id="2_vigcd"]
+[ext_resource type="FontFile" uid="uid://c64h0y83mlq7n" path="res://utilities/DonGraffiti.otf" id="3_vrplc"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_o483p"]
+font = ExtResource("3_vrplc")
+font_size = 100
+font_color = Color(0, 0, 0, 1)
+
+[node name="PauseMenu" type="Control" unique_id=1003388130]
+top_level = true
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_jgg3t")
+
+[node name="BG" type="TextureRect" parent="." unique_id=893522053]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -429.0
+offset_top = -188.0
+offset_right = 205.0
+offset_bottom = 188.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_vigcd")
+stretch_mode = 1
+flip_v = true
+
+[node name="ResumeButton" type="Button" parent="." unique_id=18021936]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -144.0
+offset_top = -42.0
+offset_right = 170.0
+offset_bottom = 42.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(157, 42)
+flat = true
+
+[node name="Label" type="Label" parent="ResumeButton" unique_id=345125699]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "RESUME"
+label_settings = SubResource("LabelSettings_o483p")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="QuitButton" type="Button" parent="." unique_id=551636472]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -144.0
+offset_top = 89.0
+offset_right = 170.0
+offset_bottom = 174.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(157, 42)
+flat = true
+
+[node name="Label" type="Label" parent="QuitButton" unique_id=942671656]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "QUIT"
+label_settings = SubResource("LabelSettings_o483p")
+horizontal_alignment = 1
+vertical_alignment = 1

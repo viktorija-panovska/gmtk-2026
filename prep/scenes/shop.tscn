@@ -4,6 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://w5kafc3luitw" path="res://utilities/icon.svg" id="2_xr744"]
 [ext_resource type="FontFile" uid="uid://cfrfthihnbi7l" path="res://utilities/nokiafc22.ttf" id="3_334lf"]
 [ext_resource type="FontFile" uid="uid://c64h0y83mlq7n" path="res://utilities/DonGraffiti.otf" id="4_334lf"]
+[ext_resource type="PackedScene" uid="uid://m7dbvnk1qkd7" path="res://game_flow/scenes/pause_menu.tscn" id="5_j1df2"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_7oafl"]
 albedo_color = Color(0.7526577, 0.54955876, 0.6882652, 1)
@@ -392,3 +393,9 @@ text = "$15"
 label_settings = SubResource("LabelSettings_o483p")
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="PauseMenu" parent="." unique_id=1003388130 instance=ExtResource("5_j1df2")]
+offset_left = 2.0
+offset_top = -9.0
+offset_right = 2.0
+offset_bottom = -9.0

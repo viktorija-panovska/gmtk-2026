@@ -8,7 +8,6 @@ var _available_stencil: Texture2D
 func _ready() -> void:
     _available_colors.append(Constants.DEFAULT_COLOR)
 
-
 # Called at end of mission to clear out all items
 func clear_items() -> void:
     _available_colors.clear()

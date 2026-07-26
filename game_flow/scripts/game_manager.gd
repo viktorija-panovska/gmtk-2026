@@ -80,6 +80,10 @@ func get_graffiti_location() -> Constants.Location:
 	return _current_mission.get_location() if _current_mission else Constants.Location.NONE
 
 
+func get_reward() -> int:
+	return _current_mission.get_reward() if _current_mission else 0
+
+
 func accept_mission(idx: int) -> void:
 	_current_mission = _missions[idx]
 	_current_mission_idx = idx

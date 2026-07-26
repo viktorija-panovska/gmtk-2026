@@ -1,4 +1,4 @@
-extends CharacterBody3D
+class_name Player extends CharacterBody3D
 
 
 
@@ -18,6 +18,8 @@ const FOV_CHANGE = 1.5
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity = 9.8
 
+var _is_input_paused: bool
+
 @onready var head = $Head
 @onready var camera = $Head/Camera3D
 
@@ -34,7 +36,7 @@ func _ready():
 	safe_margin = 0.01
 
 func _unhandled_input(event):
-	if event is InputEventMouseMotion:
+	if event is InputEventMouseMotion and not _is_input_paused:
 		head.rotate_y(-event.relative.x * SENSITIVITY)
 		camera.rotate_x(-event.relative.y * SENSITIVITY)
 		camera.rotation.x = clamp(camera.rotation.x, deg_to_rad(-80), deg_to_rad(80))
@@ -52,6 +54,9 @@ func _unhandled_input(event):
 
 
 func _physics_process(delta):
+	if _is_input_paused:
+		return
+
 	# Add the gravity.
 	if not is_on_floor():
 		velocity.y -= gravity * delta
@@ -87,3 +92,7 @@ func _headbob(time) -> Vector3:
 	pos.y = sin(time * BOB_FREQ) * BOB_AMP
 	pos.x = cos(time * BOB_FREQ / 2) * BOB_AMP
 	return pos
+
+
+func toggle_pause_input() -> void:
+	_is_input_paused = !_is_input_paused
