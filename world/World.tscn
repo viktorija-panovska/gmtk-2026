@@ -248,7 +248,7 @@ shape = SubResource("BoxShape3D_tx47m")
 mesh = SubResource("QuadMesh_pbtp0")
 
 [node name="Indicator" parent="GraffitiSpot1" index="2" unique_id=1828264155]
-transform = Transform3D(0.09379521, 0.05730742, -0.019530084, -0.020619778, 0.18273689, 0.035023313, 0.02787981, -0.057646263, 0.091607556, 0, -0.077862024, 0.9181366)
+transform = Transform3D(0.09379521, 0.057307426, -0.019530086, -0.020619778, 0.18273692, 0.03502332, 0.02787981, -0.05764627, 0.09160757, 0, -0.077862024, 0.9181366)
 
 [node name="GraffitiSpot2" type="Area3D" parent="." unique_id=1937878563]
 unique_name_in_owner = true
@@ -390,7 +390,7 @@ shape = SubResource("BoxShape3D_tx47m")
 mesh = SubResource("QuadMesh_ph6wr")
 
 [node name="Indicator" type="MeshInstance3D" parent="GraffitiSpot3" unique_id=132097691]
-transform = Transform3D(0.09379521, 0.05730742, -0.019530084, -0.020619778, 0.18273689, 0.035023313, 0.02787981, -0.057646263, 0.091607556, 0, -0.077862024, 0.9181366)
+transform = Transform3D(0.09379521, 0.057307426, -0.019530086, -0.020619778, 0.18273692, 0.03502332, 0.02787981, -0.05764627, 0.09160757, 0, -0.077862024, 0.9181366)
 mesh = ExtResource("14_e08lr")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="GraffitiSpot3" unique_id=1729240354]
@@ -632,7 +632,7 @@ shape = SubResource("BoxShape3D_tx47m")
 mesh = SubResource("QuadMesh_c81jk")
 
 [node name="Indicator" type="MeshInstance3D" parent="GraffitiSpot5" unique_id=1981636581]
-transform = Transform3D(0.09379521, 0.05730742, -0.019530084, -0.020619778, 0.18273689, 0.035023313, 0.02787981, -0.057646263, 0.091607556, 0, -0.077862024, 0.9181366)
+transform = Transform3D(0.09379521, 0.057307426, -0.019530086, -0.020619778, 0.18273692, 0.03502332, 0.02787981, -0.05764627, 0.09160757, 0, -0.077862024, 0.9181366)
 mesh = ExtResource("14_e08lr")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="GraffitiSpot5" unique_id=218605046]
@@ -753,7 +753,7 @@ shape = SubResource("BoxShape3D_tx47m")
 mesh = SubResource("QuadMesh_3j5ad")
 
 [node name="Indicator" type="MeshInstance3D" parent="GraffitiSpot6" unique_id=1234202154]
-transform = Transform3D(0.09379521, 0.05730742, -0.019530084, -0.020619778, 0.18273689, 0.035023313, 0.02787981, -0.057646263, 0.091607556, 0, -0.077862024, 0.9181366)
+transform = Transform3D(0.09379521, 0.057307426, -0.019530086, -0.020619778, 0.18273692, 0.03502332, 0.02787981, -0.05764627, 0.09160757, 0, -0.077862024, 0.9181366)
 mesh = ExtResource("14_e08lr")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="GraffitiSpot6" unique_id=58615514]

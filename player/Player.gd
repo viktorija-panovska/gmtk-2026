@@ -35,7 +35,7 @@ func _ready():
 	max_slides = 6
 	safe_margin = 0.01
 
-func _unhandled_input(event):
+func _input(event):
 	if event is InputEventMouseMotion and not _is_input_paused:
 		head.rotate_y(-event.relative.x * SENSITIVITY)
 		camera.rotate_x(-event.relative.y * SENSITIVITY)
