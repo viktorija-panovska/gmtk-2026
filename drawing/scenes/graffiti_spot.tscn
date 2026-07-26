@@ -73,7 +73,7 @@ unique_name_in_owner = true
 mesh = SubResource("QuadMesh_o483p")
 
 [node name="Indicator" type="MeshInstance3D" parent="." unique_id=1828264155]
-transform = Transform3D(0.046897605, 0.02865371, -0.009765042, -0.010309889, 0.091368444, 0.017511657, 0.013939905, -0.028823132, 0.045803778, 0, 0, 0.5)
+transform = Transform3D(0.046897605, 0.028653711, -0.009765043, -0.010309889, 0.09136845, 0.017511658, 0.013939905, -0.028823134, 0.04580378, 0, 0, 0.5)
 mesh = ExtResource("5_t218t")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1280825801]

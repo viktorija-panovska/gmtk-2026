@@ -1,0 +1,19 @@
+[gd_scene format=3 uid="uid://bniy5t0in1euc"]
+
+[ext_resource type="Script" uid="uid://b0tg77hwc7h4n" path="res://world/drawing_zone_box.gd" id="1_gjit2"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_q2d71"]
+size = Vector3(5.156006, 3.593872, 7.1851654)
+
+[node name="DrawingSiteSpot" type="Area3D" unique_id=1998831441 node_paths=PackedStringArray("cop")]
+transform = Transform3D(0.9999988, 0, 0.0015437044, 0, 1, 0, -0.0015437044, 0, 0.9999988, 0, 0, 0)
+script = ExtResource("1_gjit2")
+cop = NodePath("")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=2057727237]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.8272247, 3.6633508, 84.61182)
+shape = SubResource("BoxShape3D_q2d71")
+debug_color = Color(0, 0.6, 0.7, 0.42)
+
+[node name="DrawingSiteSpot" type="Marker3D" parent="." unique_id=1518153851]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.944397, 1.9093926, 86.535355)

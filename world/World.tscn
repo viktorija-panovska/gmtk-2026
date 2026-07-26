@@ -52,7 +52,7 @@ volumetric_fog_albedo = Color(0.89925843, 0.8992584, 0.89925843, 1)
 volumetric_fog_emission = Color(0.014211937, 3.619207e-09, 1.1280645e-09, 1)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_q2d71"]
-size = Vector3(5.156006, 3.593872, 7.1851654)
+size = Vector3(5.156006, 3.593872, 5.4486456)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_tx47m"]
 size = Vector3(2.9347076, 2.6842957, 1.9945984)
@@ -208,25 +208,12 @@ environment = SubResource("Environment_g2h84")
 transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 230.73831, -0.88087606, -98.14703)
 speed = 12
 
-[node name="DrawingSiteSpot" type="Area3D" parent="." unique_id=327733371 node_paths=PackedStringArray("cop")]
-transform = Transform3D(0.9999988, 0, 0.0015437044, 0, 1, 0, -0.0015437044, 0, 0.9999988, 115.186386, -2.4761019, -44.940056)
-script = ExtResource("6_gqh78")
-cop = NodePath("../NPC")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="DrawingSiteSpot" unique_id=1379023923]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.8272247, 3.6633508, 84.61182)
-shape = SubResource("BoxShape3D_q2d71")
-debug_color = Color(0, 0.6, 0.7, 0.42)
-
-[node name="DrawingSiteSpot" type="Marker3D" parent="DrawingSiteSpot" unique_id=1621548630]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.944397, 1.9093926, 86.535355)
-
 [node name="NPC" parent="." unique_id=125180639 node_paths=PackedStringArray("car_spot", "drawing_site_spot") instance=ExtResource("7_qpjny")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -38.755417, 1.5890877, -50.098763)
 busted_radius = 5.0
 busted_time = 3.0
 car_spot = NodePath("CarSpot")
-drawing_site_spot = NodePath("../DrawingSiteSpot/DrawingSiteSpot")
+drawing_site_spot = NodePath("../GraffitiSpot5/DrawingSiteSpot/DrawingSiteSpot")
 
 [node name="CarSpot" type="Marker3D" parent="NPC" unique_id=846374176]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.65976906, -0.14794207, 3.0259438)
@@ -240,20 +227,46 @@ transform = Transform3D(0.23676026, 0, -1.9859366, 0, 2, 0, 1.9859366, 0, 0.2367
 unique_name_in_owner = true
 transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -197.53362, 1.7131796, -10.265059)
 
-[node name="DetectionArea" parent="GraffitiSpot1" index="0" unique_id=2056115252]
+[node name="DrawingSiteSpot5" type="Area3D" parent="GraffitiSpot1" unique_id=1238159840 node_paths=PackedStringArray("cop")]
+transform = Transform3D(0.0015437464, 0, -0.9999987, 0, 1, 0, 0.9999987, 0, 0.0015437464, 81.746796, -1.6704035, 3.5916443)
+script = ExtResource("6_gqh78")
+cop = NodePath("../../NPC")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="GraffitiSpot1/DrawingSiteSpot5" unique_id=155209140]
+transform = Transform3D(1, 0, 1.1641532e-10, 0, 1, 0, -1.1641532e-10, 0, 1, -3.0671692, 1.7395542, 81.387474)
+shape = SubResource("BoxShape3D_q2d71")
+debug_color = Color(0, 0.6, 0.7, 0.42)
+
+[node name="DrawingSiteSpot" type="Marker3D" parent="GraffitiSpot1/DrawingSiteSpot5" unique_id=319669304]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.7819824, 3.7252958, 84.29564)
+
+[node name="DetectionArea" parent="GraffitiSpot1" index="1" unique_id=2056115252]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.040611267, -0.13664246, 0.944046)
 shape = SubResource("BoxShape3D_tx47m")
 
-[node name="GraffitiWall" parent="GraffitiSpot1" index="1" unique_id=1509438525]
+[node name="GraffitiWall" parent="GraffitiSpot1" index="2" unique_id=1509438525]
 mesh = SubResource("QuadMesh_pbtp0")
 
-[node name="Indicator" parent="GraffitiSpot1" index="2" unique_id=1828264155]
+[node name="Indicator" parent="GraffitiSpot1" index="3" unique_id=1828264155]
 transform = Transform3D(0.09379521, 0.057307426, -0.019530086, -0.020619778, 0.18273692, 0.03502332, 0.02787981, -0.05764627, 0.09160757, 0, -0.077862024, 0.9181366)
 
 [node name="GraffitiSpot2" type="Area3D" parent="." unique_id=1937878563]
 unique_name_in_owner = true
 transform = Transform3D(-1, 0, -1.509958e-07, 0, 1, 0, 1.509958e-07, 0, -1, -197.54453, 1.5578761, 109.28274)
 script = ExtResource("11_6ogeo")
+
+[node name="DrawingSiteSpot4" type="Area3D" parent="GraffitiSpot2" unique_id=158496963 node_paths=PackedStringArray("cop")]
+transform = Transform3D(-0.9999987, 0, -0.0015436391, 0, 1, 0, 0.0015436391, 0, -0.9999987, -3.6025696, -1.5151, 84.469505)
+script = ExtResource("6_gqh78")
+cop = NodePath("../../NPC")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="GraffitiSpot2/DrawingSiteSpot4" unique_id=628814882]
+transform = Transform3D(1, 0, 1.1641532e-10, 0, 1, 0, -1.1641532e-10, 0, 1, -3.0671692, 1.7395542, 83.11234)
+shape = SubResource("BoxShape3D_q2d71")
+debug_color = Color(0, 0.6, 0.7, 0.42)
+
+[node name="DrawingSiteSpot" type="Marker3D" parent="GraffitiSpot2/DrawingSiteSpot4" unique_id=1160578281]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.7819824, 3.7252958, 84.29564)
 
 [node name="DetectionArea" type="CollisionShape3D" parent="GraffitiSpot2" unique_id=698033775]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.040611267, -0.13664246, 0.944046)
@@ -382,6 +395,19 @@ unique_name_in_owner = true
 transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, -94.36554, 1.3490195, 29.559557)
 script = ExtResource("11_6ogeo")
 
+[node name="DrawingSiteSpot3" type="Area3D" parent="GraffitiSpot3" unique_id=207305423 node_paths=PackedStringArray("cop")]
+transform = Transform3D(-0.9999987, 0, -0.0015437027, 0, 1, 0, 0.0015437027, 0, -0.9999987, -2.4135208, -1.3062434, 83.28677)
+script = ExtResource("6_gqh78")
+cop = NodePath("../../NPC")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="GraffitiSpot3/DrawingSiteSpot3" unique_id=1616700132]
+transform = Transform3D(1, 0, 1.1641532e-10, 0, 1, 0, -1.1641532e-10, 0, 1, -3.0656052, 1.7395542, 82.1077)
+shape = SubResource("BoxShape3D_q2d71")
+debug_color = Color(0, 0.6, 0.7, 0.42)
+
+[node name="DrawingSiteSpot" type="Marker3D" parent="GraffitiSpot3/DrawingSiteSpot3" unique_id=723904011]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.7819824, 3.7252958, 84.29564)
+
 [node name="DetectionArea" type="CollisionShape3D" parent="GraffitiSpot3" unique_id=9443225]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.040611267, -0.13664246, 0.944046)
 shape = SubResource("BoxShape3D_tx47m")
@@ -502,6 +528,19 @@ vertical_alignment = 1
 unique_name_in_owner = true
 transform = Transform3D(0.5519369, 0, -0.8338858, 0, 1, 0, 0.8338858, 0, 0.5519369, -69.742096, 5.555504, -57.992584)
 script = ExtResource("11_6ogeo")
+
+[node name="DrawingSiteSpot4" type="Area3D" parent="GraffitiSpot4" unique_id=1157063157 node_paths=PackedStringArray("cop")]
+transform = Transform3D(0.05950752, 0, 0.9982277, 0, 1, 0, -0.9982277, 0, 0.05950752, -79.17921, -1.6669254, -4.9358864)
+script = ExtResource("6_gqh78")
+cop = NodePath("../../NPC")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="GraffitiSpot4/DrawingSiteSpot4" unique_id=6545985]
+transform = Transform3D(1, 0, 1.1641532e-10, 0, 1, 0, -1.1641532e-10, 0, 1, -3.0612411, 3.6633508, 78.52804)
+shape = SubResource("BoxShape3D_q2d71")
+debug_color = Color(0, 0.6, 0.7, 0.42)
+
+[node name="DrawingSiteSpot" type="Marker3D" parent="GraffitiSpot4/DrawingSiteSpot4" unique_id=183208232]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.7819824, 3.7252958, 84.29564)
 
 [node name="DetectionArea" type="CollisionShape3D" parent="GraffitiSpot4" unique_id=82340463]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.040611267, -0.13664246, 0.944046)
@@ -740,10 +779,36 @@ label_settings = SubResource("LabelSettings_ne8ba")
 horizontal_alignment = 1
 vertical_alignment = 1
 
+[node name="DrawingSiteSpot" type="Area3D" parent="GraffitiSpot5" unique_id=327733371 node_paths=PackedStringArray("cop")]
+transform = Transform3D(0.001543661, 0, -0.9999989, 0, 1, 0, 0.9999989, 0, 0.001543661, 82.48414, -3.7899554, 3.8458405)
+script = ExtResource("6_gqh78")
+cop = NodePath("../../NPC")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="GraffitiSpot5/DrawingSiteSpot" unique_id=1379023923]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.0672913, 3.6633508, 82.45009)
+shape = SubResource("BoxShape3D_q2d71")
+debug_color = Color(0, 0.6, 0.7, 0.42)
+
+[node name="DrawingSiteSpot" type="Marker3D" parent="GraffitiSpot5/DrawingSiteSpot" unique_id=1621548630]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.7819824, 3.7252958, 84.29564)
+
 [node name="GraffitiSpot6" type="Area3D" parent="." unique_id=797851797]
 unique_name_in_owner = true
 transform = Transform3D(-4.3711385e-08, 0, 0.99999994, 0, 1, 0, -0.99999994, 0, -4.3711385e-08, 107.47912, 1.3138535, 39.31097)
 script = ExtResource("11_6ogeo")
+
+[node name="DrawingSiteSpot2" type="Area3D" parent="GraffitiSpot6" unique_id=23824718 node_paths=PackedStringArray("cop")]
+transform = Transform3D(0.0015436603, 0, -0.9999985, 0, 1, 0, 0.9999985, 0, 0.0015436603, 78.93428, -3.7899554, 2.9987335)
+script = ExtResource("6_gqh78")
+cop = NodePath("../../NPC")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="GraffitiSpot6/DrawingSiteSpot2" unique_id=1145921255]
+transform = Transform3D(1, 0, 1.1641532e-10, 0, 1, 0, -1.1641532e-10, 0, 1, -3.0612411, 3.6633508, 78.52804)
+shape = SubResource("BoxShape3D_q2d71")
+debug_color = Color(0, 0.6, 0.7, 0.42)
+
+[node name="DrawingSiteSpot" type="Marker3D" parent="GraffitiSpot6/DrawingSiteSpot2" unique_id=813270612]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.7819824, 3.7252958, 84.29564)
 
 [node name="DetectionArea" type="CollisionShape3D" parent="GraffitiSpot6" unique_id=1256898527]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.040611267, -0.13664246, 0.944046)
