@@ -1,12 +1,16 @@
 extends Node3D
 
-@export var _graffiti_locations: Dictionary[Constants.Location, Marker3D]
-
-@onready var _graffiti_spot: GraffitiSpot = %GraffitiSpot as GraffitiSpot
+@onready var _graffiti_spots: Array[GraffitiSpot] = [
+	%GraffitiSpot1 as GraffitiSpot,
+	%GraffitiSpot2 as GraffitiSpot,
+	%GraffitiSpot3 as GraffitiSpot,
+	%GraffitiSpot4 as GraffitiSpot,
+	%GraffitiSpot5 as GraffitiSpot,
+	%GraffitiSpot6 as GraffitiSpot,
+]
 @onready var _phone: Phone = %Phone as Phone
 
 
 func _ready() -> void:
-	var location = Constants.Location.WALL#GameManager.get_graffiti_location()
-	if location not in _graffiti_locations: return
-	_graffiti_spot.setup(_graffiti_locations[location], _phone)
+	for spot in _graffiti_spots:
+		spot.setup(_phone)

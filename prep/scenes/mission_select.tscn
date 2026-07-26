@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://doc40pd7dct1k" path="res://prep/scripts/mission_select.gd" id="1_co1e6"]
 [ext_resource type="Texture2D" uid="uid://coam10wk5rn2w" path="res://utilities/brick-wall.tga" id="2_cott1"]
 [ext_resource type="FontFile" uid="uid://cfrfthihnbi7l" path="res://utilities/nokiafc22.ttf" id="3_5o5h4"]
+[ext_resource type="PackedScene" uid="uid://m7dbvnk1qkd7" path="res://game_flow/scenes/pause_menu.tscn" id="4_5o5h4"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_kyohr"]
 bg_color = Color(0, 0, 0, 1)
@@ -401,3 +402,11 @@ label_settings = SubResource("LabelSettings_c5xc1")
 horizontal_alignment = 1
 vertical_alignment = 1
 text_overrun_behavior = 5
+
+[node name="PauseMenu" parent="." unique_id=1003388130 instance=ExtResource("4_5o5h4")]
+visible = false
+layout_mode = 1
+offset_left = 2.0
+offset_top = -12.0
+offset_right = 2.0
+offset_bottom = -12.0

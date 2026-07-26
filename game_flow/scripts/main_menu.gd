@@ -15,6 +15,8 @@ func _play_sfx(player: AudioStreamPlayer) -> void:
 	player.play()
 
 func _ready() -> void:
+	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+	
 	_start_button.mouse_entered.connect(func(): _hover_button(_start_button, _start_button_tween, true))
 	_start_button.mouse_exited.connect(func(): _hover_button(_start_button, _start_button_tween, false))
 	_start_button.pressed.connect(func(): SceneLoader.load_scene(Constants.SCENE_UID_MISSION_SELECT))
