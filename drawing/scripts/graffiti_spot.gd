@@ -43,4 +43,7 @@ func _toggle_canvas(on: bool) -> void:
         return
 
     Input.set_custom_mouse_cursor(null)
-    
+
+
+func get_drawing() -> Texture2D:
+    return _canvas.get_drawing()

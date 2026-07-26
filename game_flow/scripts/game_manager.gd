@@ -85,4 +85,8 @@ func accept_mission(idx: int) -> void:
 	_current_mission_idx = idx
 	SceneLoader.load_scene(Constants.SCENE_UID_SHOP)
 
+
+func end_mission() -> void:
+	pass
+
 #endregion

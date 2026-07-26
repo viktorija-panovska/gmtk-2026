@@ -2,7 +2,6 @@ class_name GraffitiScorer extends Node
 
 const GROUPS_ONE_SIDE: int = 8
 const GROUPS_TOTAL: int = GROUPS_ONE_SIDE * GROUPS_ONE_SIDE
-const SCORING_LEEWAY: int = 0
 const MAX_SCORE_PER_GROUP: int = 10
 
 
@@ -26,13 +25,16 @@ class Scores:
 		return black[group] + red[group] + green[group] + blue[group]
 
 
+@export var _drawing: DrawableTexture2D
 @export var _scoring_curve: Curve
+
 var _max_reference_score_per_group: float
 
 
-func compute_score(drawing: Image) -> float:
-	drawing.resize(64, 64, Image.Interpolation.INTERPOLATE_NEAREST)
-	drawing.convert(Image.FORMAT_RGBA8)
+func compute_score() -> float:
+	var drawing_img = _drawing.get_image()
+	drawing_img.resize(64, 64, Image.Interpolation.INTERPOLATE_NEAREST)
+	drawing_img.convert(Image.FORMAT_RGBA8)
 
 	var reference_img: Image = GameManager.get_reference_image().get_image()
 	reference_img.resize(64, 64, Image.Interpolation.INTERPOLATE_NEAREST)
@@ -44,10 +46,16 @@ func compute_score(drawing: Image) -> float:
 		mask.resize(64, 64, Image.Interpolation.INTERPOLATE_NEAREST)
 		mask.convert(Image.FORMAT_RGBA8)
 
-	var scores: Array[Scores] = _count_pixels(drawing, reference_img, mask)
+	var scores: Array[Scores] = _count_pixels(drawing_img, reference_img, mask)
 	var group_score: float = _compute_raw_score(scores[0], scores[1])
 
 	return group_score / (GROUPS_TOTAL * MAX_SCORE_PER_GROUP * 4) * 100
+
+
+func compute_reward(score: float, max_reward: int) -> int:
+	if score >= 50:
+		return max_reward
+	return roundi(max_reward / 2)
 
 
 func _count_pixels(drawing_img: Image, reference_img: Image, mask_img: Image) -> Array[Scores]:
