@@ -248,6 +248,7 @@ offset_transform_enabled = true
 texture = ExtResource("2_xr744")
 
 [node name="PhoneBG" type="ColorRect" parent="UI/PhoneObject" unique_id=970848938]
+unique_name_in_owner = true
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.095000006
