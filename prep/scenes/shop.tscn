@@ -103,9 +103,9 @@ script = ExtResource("1_yxnod")
 _stencil_price = 50
 _color_prices = Dictionary[Color, int]({
 Color(0, 0, 0, 1): 0,
-Color(1, 0, 0, 1): 20,
-Color(0, 0, 1, 1): 20,
-Color(0, 1, 0, 1): 20
+Color(1, 0, 0, 1): 50,
+Color(0, 0, 1, 1): 50,
+Color(0, 1, 0, 1): 50
 })
 
 [node name="Camera3D" type="Camera3D" parent="." unique_id=843881179]

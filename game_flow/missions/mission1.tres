@@ -7,7 +7,7 @@
 [resource]
 script = ExtResource("1_fs7rk")
 _time_in_seconds = 600
-_reward = 50
+_reward = 100
 _reference_image = ExtResource("1_cs55x")
 _description = "Tag the wall with a toxic warning. Make them think twice."
 _police_countdown_seconds = 30

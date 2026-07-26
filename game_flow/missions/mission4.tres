@@ -7,7 +7,7 @@
 [resource]
 script = ExtResource("2_x3sda")
 _time_in_seconds = 120
-_reward = 250
+_reward = 100
 _reference_image = ExtResource("1_x3sda")
 _description = "Paint the smiling face. Let the city wonder who returned."
 _police_countdown_seconds = 30

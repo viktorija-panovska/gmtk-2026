@@ -7,7 +7,7 @@
 [resource]
 script = ExtResource("2_nycah")
 _time_in_seconds = 240
-_reward = 150
+_reward = 100
 _reference_image = ExtResource("1_nycah")
 _description = "Leave a heart behind. Even concrete deserves a little love."
 _police_countdown_seconds = 30
