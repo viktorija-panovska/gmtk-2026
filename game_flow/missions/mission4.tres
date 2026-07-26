@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="Mission" format=3 uid="uid://bjib35tfw15qv"]
+
+[ext_resource type="Texture2D" uid="uid://c47onfdoe6mpy" path="res://game_flow/missions/images/Smile.png" id="1_x3sda"]
+[ext_resource type="Texture2D" uid="uid://c0it4ala5c2v4" path="res://game_flow/missions/images/Smile_Sten.png" id="2_qu7mj"]
+[ext_resource type="Script" uid="uid://bka68top0jv34" path="res://game_flow/scripts/mission.gd" id="2_x3sda"]
+
+[resource]
+script = ExtResource("2_x3sda")
+_time_in_seconds = 120
+_reward = 250
+_reference_image = ExtResource("1_x3sda")
+_description = "Paint the smiling face. Let the city wonder who returned."
+_police_countdown_seconds = 30
+_stencil = ExtResource("2_qu7mj")
+_location = 1

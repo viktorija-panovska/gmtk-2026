@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="Mission" format=3 uid="uid://bp23cb8p40jpi"]
+
+[ext_resource type="Texture2D" uid="uid://mwep5hhn7egc" path="res://game_flow/missions/images/Srce.png" id="1_nycah"]
+[ext_resource type="Script" uid="uid://bka68top0jv34" path="res://game_flow/scripts/mission.gd" id="2_nycah"]
+[ext_resource type="Texture2D" uid="uid://d0frll0gmln6b" path="res://game_flow/missions/images/Srce_Sten.png" id="2_wacyx"]
+
+[resource]
+script = ExtResource("2_nycah")
+_time_in_seconds = 240
+_reward = 150
+_reference_image = ExtResource("1_nycah")
+_description = "Leave a heart behind. Even concrete deserves a little love."
+_police_countdown_seconds = 30
+_stencil = ExtResource("2_wacyx")
+_location = 1

@@ -1,14 +1,15 @@
 [gd_resource type="Resource" script_class="Mission" format=3 uid="uid://b5wyfh2tutk0s"]
 
-[ext_resource type="Texture2D" uid="uid://w5kafc3luitw" path="res://utilities/icon.svg" id="1_3chqq"]
+[ext_resource type="Texture2D" uid="uid://b0goq1uirfad2" path="res://game_flow/missions/images/Boom.png" id="1_2jwaj"]
 [ext_resource type="Script" uid="uid://bka68top0jv34" path="res://game_flow/scripts/mission.gd" id="2_2jwaj"]
+[ext_resource type="Texture2D" uid="uid://d24t3sytts1pb" path="res://game_flow/missions/images/Boom_Sten.png" id="2_mknpi"]
 
 [resource]
 script = ExtResource("2_2jwaj")
-_time_in_seconds = 60
+_time_in_seconds = 400
 _reward = 100
-_reference_image = ExtResource("1_3chqq")
-_description = "AAAAAAAAAAAAA"
-_police_countdown_seconds = 50
-_stencil = ExtResource("1_3chqq")
+_reference_image = ExtResource("1_2jwaj")
+_description = "Leave an explosive statement. Loud enough without making a sound."
+_police_countdown_seconds = 30
+_stencil = ExtResource("2_mknpi")
 _location = 1
