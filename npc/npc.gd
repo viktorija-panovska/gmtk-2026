@@ -8,6 +8,10 @@ class_name CopNPC
 ##   - StateTimer
 
 ## need 2 markers, car and drawing spot
+@onready var anim_player: AnimationPlayer = $Cop_anim/AnimationPlayer
+@onready var footstep_player: AudioStreamPlayer3D = $FootstepPlayer
+@onready var siren_player: AudioStreamPlayer3D = $SirenPlayer
+@onready var whistle_player: AudioStreamPlayer3D = $WhistlePlayer
 
 signal player_busted
 
@@ -61,6 +65,7 @@ var last_known_position: Vector3
 var _pending_state: int = -1   # used only for the "wait then transition" cases
 
 func _ready() -> void:
+	_setup_animation_loops()
 	if car_spot:
 		car_position = car_spot.global_position
 	else:
@@ -81,6 +86,41 @@ func _ready() -> void:
 	_enter_state(State.IN_CAR)
 	floor_max_angle = deg_to_rad(100) #Snap Up Max Height
 	floor_snap_length = 0.2 #Snap Down Max Drop (before gravity sets in instead)
+	
+	
+func _play_anim(anim_name: String) -> void:
+	if not anim_player:
+		return
+	if anim_player.current_animation != anim_name:
+		anim_player.play(anim_name)
+		
+func _update_footsteps() -> void:
+	if not footstep_player:
+		return
+	var horizontal_speed := Vector2(velocity.x, velocity.z).length()
+	var should_be_walking := horizontal_speed > 0.2 and is_on_floor()
+ 
+	if should_be_walking and not footstep_player.playing:
+		footstep_player.play()
+	elif not should_be_walking and footstep_player.playing:
+		footstep_player.stop()
+		
+func _play_one_shot(player: AudioStreamPlayer3D) -> void:
+	if not player:
+		return
+	player.stop()   # restart cleanly even if it's still finishing a previous play
+	player.play()
+		
+func _setup_animation_loops() -> void:
+	if not anim_player:
+		return
+	var exclude := ["Gun in holster"]
+	for anim_name in anim_player.get_animation_list():
+		if anim_name in exclude:
+			continue
+		var anim := anim_player.get_animation(anim_name)
+		if anim:
+			anim.loop_mode = Animation.LOOP_LINEAR
 
 ## notify cop if he is in car
 func notify_player_entered_drawing_area() -> void:
@@ -115,40 +155,55 @@ func _enter_state(new_state: State) -> void:
 
 	match state:
 		State.IN_CAR:
+			_play_anim("Gun in holster") 
 			vision_cone.monitoring = false #cone off in car
 			global_position = car_position
 			velocity = Vector3.ZERO
 			arrived_at_car.emit()
+			
 
 		State.TO_DRAWING_SITE:
+			_play_one_shot(siren_player)
+			_play_anim("Walk")
 			vision_cone.monitoring = true   #cone on in all other cases
 			nav_agent.set_target_position(drawing_site_position)
 			print("NPC moving to draw site")
 			print("NPC target reachable: ", nav_agent.is_target_reachable())
 
 		State.AT_DRAWING_SITE:
+			_play_anim("Looking around") 
 			vision_cone.monitoring = true
 			velocity = Vector3.ZERO
 			state_timer.start(wait_at_site_time)
 
 		State.SPOTTED_WARNING:
+			#_play_one_shot(whistle_player)
+			_play_anim("Gun in holster")  
+			
 			velocity = Vector3.ZERO
 			state_timer.start(warning_time)
 			# hook up alers here
 
 		State.CHASE:
+			_play_one_shot(whistle_player)
+			
+			_play_anim("Walk with gun")
+			 
 			if player:
 				nav_agent.set_target_position(player.global_position)
 
 		State.SEARCH_LAST_KNOWN:
+			_play_anim("Walk with gun") 
 			nav_agent.set_target_position(last_known_position)
 
 		State.CONFUSED:
 			velocity = Vector3.ZERO
+			_play_anim("Looking around")
 			# hook up confused here
 			state_timer.start(confused_time)
 
 		State.RETURN_TO_CAR:
+			_play_anim("Walk")  
 			vision_cone.monitoring = true
 			nav_agent.set_target_position(car_position)
 
@@ -189,6 +244,7 @@ func _on_body_hidden(body: Node3D) -> void:
 func _physics_process(_delta: float) -> void:
 	_apply_gravity(_delta)
 	_update_busted_check(_delta)
+	_update_footsteps()
 	match state:
 		State.CHASE:
 			if player and player_currently_visible:
@@ -206,6 +262,7 @@ func _physics_process(_delta: float) -> void:
 				if state_timer.is_stopped():
 					##state_timer.start(confused_time) #no need  double
 					print("arrived at last known spot")
+					_play_anim("Looking around")
 					state_timer.start(0)
 				_stand_still()
 

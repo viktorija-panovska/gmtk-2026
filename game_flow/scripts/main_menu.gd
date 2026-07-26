@@ -5,20 +5,27 @@ var _quit_button_tween: Tween
 
 @onready var _start_button: Button = %StartButton as Button
 @onready var _quit_button: Button = %QuitButton as Button
+#@onready var _hover_sound: AudioStreamPlayer = %HoverSoundPlayer as AudioStreamPlayer
+#@onready var _click_sound: AudioStreamPlayer = %ClickSoundPlayer as AudioStreamPlayer
 
+func _play_sfx(player: AudioStreamPlayer) -> void:
+	if not player:
+		return
+	player.stop()
+	player.play()
 
 func _ready() -> void:
-    _start_button.mouse_entered.connect(func(): _hover_button(_start_button, _start_button_tween, true))
-    _start_button.mouse_exited.connect(func(): _hover_button(_start_button, _start_button_tween, false))
-    _start_button.pressed.connect(func(): SceneLoader.load_scene(Constants.SCENE_UID_MISSION_SELECT))
+	_start_button.mouse_entered.connect(func(): _hover_button(_start_button, _start_button_tween, true))
+	_start_button.mouse_exited.connect(func(): _hover_button(_start_button, _start_button_tween, false))
+	_start_button.pressed.connect(func(): SceneLoader.load_scene(Constants.SCENE_UID_MISSION_SELECT))
 
-    _quit_button.mouse_entered.connect(func(): _hover_button(_quit_button, _quit_button_tween, true))
-    _quit_button.mouse_exited.connect(func(): _hover_button(_quit_button, _quit_button_tween, false))
-    _quit_button.pressed.connect(func(): get_tree().quit())
+	_quit_button.mouse_entered.connect(func(): _hover_button(_quit_button, _quit_button_tween, true))
+	_quit_button.mouse_exited.connect(func(): _hover_button(_quit_button, _quit_button_tween, false))
+	_quit_button.pressed.connect(func(): get_tree().quit())
 
 
 func _hover_button(button: Button, tween: Tween, is_hovering: bool) -> void:
-    if tween:
-        tween.kill()
-    tween = create_tween()
-    tween.tween_property(button, "scale", Vector2(1.2, 1.2) if is_hovering else Vector2(1, 1), 0.1)
+	if tween:
+		tween.kill()
+	tween = create_tween()
+	tween.tween_property(button, "scale", Vector2(1.2, 1.2) if is_hovering else Vector2(1, 1), 0.1)

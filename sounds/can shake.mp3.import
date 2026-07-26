@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://bka3k22m73683"
+path="res://.godot/imported/can shake.mp3-12e22b8db8b3afb955e485da220b650b.mp3str"
+
+[deps]
+
+source_file="res://sounds/can shake.mp3"
+dest_files=["res://.godot/imported/can shake.mp3-12e22b8db8b3afb955e485da220b650b.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

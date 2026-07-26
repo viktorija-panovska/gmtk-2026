@@ -20,7 +20,7 @@ var gravity = 9.8
 
 @onready var head = $Head
 @onready var camera = $Head/Camera3D
-
+@onready var footstep_player: AudioStreamPlayer3D = $FootstepPlayer
 
 func _ready():
 	add_to_group("player")
@@ -51,6 +51,17 @@ func _unhandled_input(event):
 				Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 
 
+func _update_footsteps() -> void:
+	if not footstep_player:
+		return
+	var horizontal_speed := Vector2(velocity.x, velocity.z).length()
+	var should_be_walking := horizontal_speed > 0.5 and is_on_floor()
+
+	if should_be_walking and not footstep_player.playing:
+		footstep_player.play()
+	elif not should_be_walking and footstep_player.playing:
+		footstep_player.stop()
+
 func _physics_process(delta):
 	# Add the gravity.
 	if not is_on_floor():
@@ -78,7 +89,7 @@ func _physics_process(delta):
 	
 	var target_fov = BASE_FOV 
 	camera.fov = lerp(camera.fov, target_fov, delta * 8.0)
-	
+	_update_footsteps()   
 	move_and_slide()
 
 
