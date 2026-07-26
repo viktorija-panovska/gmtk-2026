@@ -8,6 +8,7 @@ class_name GraffitiCanvas extends Control
 @export var _spray_can_textures: Dictionary[Color, Texture2D]
 @export var _cursor_textures: Dictionary[Color, Texture2D]
 
+var _phone: Phone
 var _hovered_color: Color = Constants.INVALID_COLOR
 var _hovered_spray_can: Control
 var _spray_can_tweens: Dictionary[Color, Tween]
@@ -15,7 +16,6 @@ var _current_cursor: Texture2D
 
 @onready var _color_container: HBoxContainer = %ColorContainer as HBoxContainer
 @onready var _stencil: TextureRect = %Stencil as TextureRect
-@onready var _phone: Phone = %Phone as Phone
 
 
 #region Built-in Methods
@@ -36,7 +36,8 @@ func _process(_delta: float) -> void:
 #endregion
 
 
-func setup() -> void:
+func setup(phone: Phone) -> void:
+	_phone = phone
 	_stencil.visible = Inventory.has_stencil()
 	_stencil.texture = Inventory.get_available_stencil()
 	_fill_colors()
@@ -47,20 +48,8 @@ func set_current_cursor() -> void:
 	Input.set_custom_mouse_cursor(_current_cursor)
 
 
-func finalize_painting() -> Image:
-	var drawing: Image = _drawable_texture.get_image()
-	drawing.convert(Image.FORMAT_RGBA8)
-
-	var final = Image.create_empty(drawing.get_size().x, drawing.get_size().y, false, Image.FORMAT_RGBA8)
-	final.fill(Color.WHITE)
-	final.blend_rect(drawing, Rect2(Vector2(0, 0), drawing.get_size()), Vector2(0, 0))
-
-	if Inventory.has_stencil():
-		var mask: Image = Inventory.get_available_stencil().get_image()
-		mask.convert(Image.FORMAT_RGBA8)
-		final.blend_rect(mask, Rect2(Vector2(0, 0), mask.get_size()), Vector2(0, 0))
-
-	return final
+func get_drawing() -> Texture2D:
+	return _drawable_texture
 
 
 #region Painting

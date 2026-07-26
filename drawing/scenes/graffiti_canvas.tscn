@@ -9,10 +9,12 @@
 [ext_resource type="Texture2D" uid="uid://jx8ylfqxijx1" path="res://drawing/textures/blue_spray_paint_can.png" id="6_f11qt"]
 [ext_resource type="Texture2D" uid="uid://cr2bnb631mcyt" path="res://drawing/textures/red_spray_paint_can_cursor.png" id="8_y0qqk"]
 [ext_resource type="Texture2D" uid="uid://c4cjvh8qoyiq7" path="res://drawing/textures/blue_spray_paint_can_cursor.png" id="9_4y31e"]
-[ext_resource type="PackedScene" uid="uid://dcql52mmn7msp" path="res://game_flow/scenes/phone.tscn" id="10_8ygry"]
 [ext_resource type="Texture2D" uid="uid://i003ypde4eqr" path="res://drawing/textures/stencil_test.png" id="10_y0qqk"]
+[ext_resource type="FontFile" uid="uid://c64h0y83mlq7n" path="res://utilities/DonGraffiti.otf" id="11_xl6o2"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_o483p"]
+font = ExtResource("11_xl6o2")
+font_size = 30
 font_color = Color(0, 0, 0, 1)
 
 [node name="GraffitiCanvas" type="Control" unique_id=2064535663]
@@ -37,6 +39,15 @@ Color(1, 0, 0, 1): ExtResource("8_y0qqk"),
 Color(0, 0, 1, 1): ExtResource("9_4y31e")
 })
 
+[node name="Background" type="TextureRect" parent="." unique_id=1851942795]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
 [node name="DrawingTexture" type="TextureRect" parent="." unique_id=1789833365]
 unique_name_in_owner = true
 layout_mode = 1
@@ -49,6 +60,7 @@ texture = ExtResource("3_mm5nj")
 
 [node name="Stencil" type="TextureRect" parent="." unique_id=521882559]
 unique_name_in_owner = true
+visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -69,19 +81,15 @@ offset_bottom = 69.0
 grow_horizontal = 2
 grow_vertical = 0
 
-[node name="Phone" parent="." unique_id=175310537 instance=ExtResource("10_8ygry")]
-unique_name_in_owner = true
-layout_mode = 1
-
 [node name="Label" type="Label" parent="." unique_id=497447173]
 layout_mode = 1
 anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
-offset_left = -188.0
-offset_top = 4.0
-offset_right = -12.0
-offset_bottom = 27.0
+offset_left = -287.0
+offset_top = 16.0
+offset_right = -16.0
+offset_bottom = 46.0
 grow_horizontal = 0
-text = "Press E to close canvas"
+text = "Press E TO CLOSE CANVAS"
 label_settings = SubResource("LabelSettings_o483p")

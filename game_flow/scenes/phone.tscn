@@ -2,6 +2,14 @@
 
 [ext_resource type="Texture2D" uid="uid://w5kafc3luitw" path="res://utilities/icon.svg" id="1_mvmhf"]
 [ext_resource type="Script" uid="uid://dty544qrjfbbd" path="res://game_flow/scripts/phone.gd" id="2_17fpk"]
+[ext_resource type="FontFile" uid="uid://cfrfthihnbi7l" path="res://utilities/nokiafc22.ttf" id="3_17fpk"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_f2txt"]
+font = ExtResource("3_17fpk")
+
+[sub_resource type="LabelSettings" id="LabelSettings_1ainy"]
+font = ExtResource("3_17fpk")
+font_color = Color(1, 0, 0, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_lxdrg"]
 bg_color = Color(1, 0, 0, 1)
@@ -71,11 +79,13 @@ layout_mode = 1
 anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
-offset_left = -66.0
+offset_left = -78.0
+offset_top = 3.0
 offset_right = -24.0
-offset_bottom = 23.0
+offset_bottom = 26.0
 grow_horizontal = 0
 text = "00:00"
+label_settings = SubResource("LabelSettings_f2txt")
 horizontal_alignment = 1
 vertical_alignment = 1
 
@@ -83,10 +93,12 @@ vertical_alignment = 1
 unique_name_in_owner = true
 layout_mode = 1
 offset_left = 25.0
-offset_right = 67.0
-offset_bottom = 23.0
+offset_top = 3.0
+offset_right = 79.0
+offset_bottom = 26.0
 theme_override_colors/font_color = Color(1, 0, 0, 1)
 text = "00:00"
+label_settings = SubResource("LabelSettings_1ainy")
 horizontal_alignment = 1
 vertical_alignment = 1
 

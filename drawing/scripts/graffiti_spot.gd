@@ -1,8 +1,7 @@
-extends Area3D
+class_name GraffitiSpot extends Area3D
 
 var _is_in_area: bool
 var _is_canvas_open: bool
-var _has_canvas_been_opened: bool
 
 @onready var _canvas: GraffitiCanvas = %Canvas as GraffitiCanvas
 @onready var _prompt: Control = %Prompt as Control
@@ -29,10 +28,6 @@ func _toggle_canvas_prompt(on: bool) -> void:
 func _toggle_canvas(on: bool) -> void:
     _prompt.visible = not on
 
-    if not _has_canvas_been_opened:
-        _canvas.setup()
-        _has_canvas_been_opened = true
-
     _canvas.process_mode = Node.PROCESS_MODE_INHERIT if on else Node.PROCESS_MODE_DISABLED
     _canvas.visible = on
     _canvas.mouse_filter = Control.MOUSE_FILTER_STOP if on else Control.MOUSE_FILTER_IGNORE
@@ -43,4 +38,13 @@ func _toggle_canvas(on: bool) -> void:
         return
 
     Input.set_custom_mouse_cursor(null)
-    
+
+
+func setup(location: Marker3D, phone: Phone) -> void:
+    global_position = location.global_position
+    global_rotation = location.global_rotation
+    _canvas.setup(phone)
+
+
+func get_drawing() -> Texture2D:
+    return _canvas.get_drawing()

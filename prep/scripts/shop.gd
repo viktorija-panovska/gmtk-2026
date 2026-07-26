@@ -16,14 +16,19 @@ var _is_door_hovered: bool
 @onready var _stencil_mesh: MeshInstance3D = %StencilMesh as MeshInstance3D
 @onready var _stencil_price_label: Label = %StencilPrice as Control
 @onready var _paints: Dictionary[Color, StaticBody3D] = {
+	Color.BLACK: %BlackPaintCan as Node3D,
 	Color.RED: %RedPaintCan as Node3D,
-	Color.BLUE: %BluePaintCan as Node3D 
+	Color.BLUE: %BluePaintCan as Node3D,
+	Color.GREEN: %GreenPaintCan as Node3D
 }
 @onready var _color_price_labels: Dictionary[Color, Label] = {
+	Color.BLACK: %BlackPrice as Label,
 	Color.RED: %RedPrice as Label,
-	Color.BLUE: %BluePrice as Label
+	Color.BLUE: %BluePrice as Label,
+	Color.GREEN: %GreenPrice as Label
 }
 @onready var _money_label: Label = %Money as Label
+@onready var _phone_bg: ColorRect = %PhoneBG as ColorRect
 @onready var _door: StaticBody3D = %Door as StaticBody3D
 @onready var _door_container: Node3D = %DoorContainer as Node3D
 
@@ -37,7 +42,7 @@ func _ready() -> void:
 	_stencil_price_label.text = "$%s" % _stencil_price
 	for color in _color_price_labels:
 		_color_price_labels[color].text = "$%s" % (_color_prices[color] if color in _color_prices else 0)
-	_money_label.text = "BUDGET: $%s" % Inventory.get_money()
+	_money_label.text = "$%s" % Inventory.get_money()
 
 	_stencil.mouse_entered.connect(_hover_stencil)
 	_stencil.mouse_exited.connect(_unhover_stencil)
@@ -91,7 +96,8 @@ func _buy_paint() -> void:
 	if _hovered_color in _color_prices and _color_prices[_hovered_color] > 0 and not _try_buy(_color_prices[_hovered_color]):
 		return
 
-	Inventory.gain_color(_hovered_color)
+	if _hovered_color != Color.BLACK:
+		Inventory.gain_color(_hovered_color)
 	_hovered_spray_can.process_mode = Node.PROCESS_MODE_DISABLED
 	var color: Color = _hovered_color
 	var can: Node3D = _hovered_spray_can
@@ -146,12 +152,12 @@ func _try_buy(price: int) -> bool:
 		if _no_money_tween:
 			_no_money_tween.kill()
 		_no_money_tween = create_tween().chain()
-		_no_money_tween.tween_property(_money_label, "self_modulate", Color.RED, 0.1)
-		_no_money_tween.tween_property(_money_label, "self_modulate", Color.WHITE, 0.1).set_delay(1)
+		_no_money_tween.tween_property(_phone_bg, "self_modulate", Color.RED, 0.1)
+		_no_money_tween.tween_property(_phone_bg, "self_modulate", Color.WHITE, 0.1).set_delay(1)
 		return false
 	
 	Inventory.spend_money(price)
-	_money_label.text = "BUDGET: $%s" % Inventory.get_money()
+	_money_label.text = "$%s" % Inventory.get_money()
 	return true
 
 

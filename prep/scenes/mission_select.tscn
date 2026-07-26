@@ -1,41 +1,89 @@
 [gd_scene format=3 uid="uid://dc5c1g8mjups0"]
 
-[ext_resource type="Texture2D" uid="uid://w5kafc3luitw" path="res://utilities/icon.svg" id="1_8ci6e"]
 [ext_resource type="Script" uid="uid://doc40pd7dct1k" path="res://prep/scripts/mission_select.gd" id="1_co1e6"]
+[ext_resource type="Texture2D" uid="uid://coam10wk5rn2w" path="res://utilities/brick-wall.tga" id="2_cott1"]
+[ext_resource type="FontFile" uid="uid://cfrfthihnbi7l" path="res://utilities/nokiafc22.ttf" id="3_5o5h4"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_kyohr"]
+bg_color = Color(0, 0, 0, 1)
+corner_radius_top_left = 120
+corner_radius_top_right = 120
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_o483p"]
 bg_color = Color(0.40243423, 0.668814, 0.50768906, 1)
 
 [sub_resource type="LabelSettings" id="LabelSettings_o483p"]
+font = ExtResource("3_5o5h4")
 font_size = 40
 font_color = Color(0, 0, 0, 1)
 
 [sub_resource type="LabelSettings" id="LabelSettings_co1e6"]
-font_size = 35
+font = ExtResource("3_5o5h4")
+font_size = 30
 font_color = Color(0, 0, 1, 1)
 outline_color = Color(1, 0, 0, 1)
 
 [sub_resource type="LabelSettings" id="LabelSettings_cott1"]
-font_size = 35
+font = ExtResource("3_5o5h4")
+font_size = 30
 font_color = Color(1, 0, 0, 1)
 outline_color = Color(1, 0, 0, 1)
 
 [sub_resource type="LabelSettings" id="LabelSettings_kyohr"]
-font_size = 30
+font = ExtResource("3_5o5h4")
+font_size = 25
 font_color = Color(0, 0, 0, 1)
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_8crxd"]
+bg_color = Color(0.45840496, 0.45840508, 0.4584049, 1)
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ternv"]
+bg_color = Color(0.45882353, 0.45882353, 0.45882353, 1)
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5o5h4"]
+bg_color = Color(0.40243423, 0.668814, 0.50768906, 1)
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
+
 [sub_resource type="LabelSettings" id="LabelSettings_6tiwt"]
-font_size = 50
+font = ExtResource("3_5o5h4")
+font_size = 40
 font_color = Color(0, 0, 0, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_co1e6"]
 bg_color = Color(1, 0, 0, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_aowqb"]
+bg_color = Color(1, 0, 0, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_cott1"]
 bg_color = Color(0.5885512, 0.6078444, 0.59083146, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
 
 [sub_resource type="LabelSettings" id="LabelSettings_c5xc1"]
-font_size = 45
+font = ExtResource("3_5o5h4")
+font_size = 30
 font_color = Color(0, 0, 0, 1)
 
 [node name="MissionSelect" type="Control" unique_id=1907107381]
@@ -47,7 +95,23 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_co1e6")
 
-[node name="Phone" type="TextureRect" parent="." unique_id=1460604976]
+[node name="BG" type="TextureRect" parent="." unique_id=1552055291]
+self_modulate = Color(0.31792572, 0.31792572, 0.31792572, 1)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -429.0
+offset_top = -188.0
+offset_right = 205.0
+offset_bottom = 188.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_cott1")
+stretch_mode = 1
+flip_v = true
+
+[node name="Phone" type="Panel" parent="." unique_id=981526199]
 unique_name_in_owner = true
 self_modulate = Color(0, 0, 0, 1)
 layout_mode = 1
@@ -55,13 +119,13 @@ anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 offset_left = 35.0
-offset_top = 33.0
+offset_top = 13.0
 offset_right = -36.0
-offset_bottom = 611.44714
+offset_bottom = 591.44714
 grow_horizontal = 2
 grow_vertical = 2
 offset_transform_enabled = true
-texture = ExtResource("1_8ci6e")
+theme_override_styles/panel = SubResource("StyleBoxFlat_kyohr")
 
 [node name="BG" type="ColorRect" parent="Phone" unique_id=1437784837]
 unique_name_in_owner = true
@@ -71,12 +135,13 @@ anchor_left = 0.08800001
 anchor_top = 0.041
 anchor_right = 0.919
 anchor_bottom = 0.47100002
-offset_left = -0.37600708
-offset_top = 0.4129982
-offset_right = 0.053955078
-offset_bottom = -0.03302002
+offset_left = -0.12800598
+offset_top = 37.715664
+offset_right = 0.30194092
+offset_bottom = 37.269653
 grow_horizontal = 2
 grow_vertical = 2
+color = Color(0.5889776, 0.7935052, 0.67526644, 1)
 
 [node name="MissionList" type="VBoxContainer" parent="Phone/BG" unique_id=1607021880]
 unique_name_in_owner = true
@@ -98,6 +163,8 @@ layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_left = 20.0
+offset_right = -20.0
 grow_horizontal = 2
 grow_vertical = 2
 label_settings = SubResource("LabelSettings_o483p")
@@ -114,6 +181,8 @@ layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_left = 20.0
+offset_right = -20.0
 grow_horizontal = 2
 grow_vertical = 2
 label_settings = SubResource("LabelSettings_o483p")
@@ -130,6 +199,9 @@ layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_left = 20.0
+offset_right = -20.0
+offset_bottom = -1.0
 grow_horizontal = 2
 grow_vertical = 2
 label_settings = SubResource("LabelSettings_o483p")
@@ -146,6 +218,8 @@ layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_left = 20.0
+offset_right = -20.0
 grow_horizontal = 2
 grow_vertical = 2
 label_settings = SubResource("LabelSettings_o483p")
@@ -162,6 +236,8 @@ layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_left = 20.0
+offset_right = -20.0
 grow_horizontal = 2
 grow_vertical = 2
 label_settings = SubResource("LabelSettings_o483p")
@@ -178,6 +254,9 @@ layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_left = 20.0
+offset_right = -20.0
+offset_bottom = -1.0
 grow_horizontal = 2
 grow_vertical = 2
 label_settings = SubResource("LabelSettings_o483p")
@@ -216,9 +295,9 @@ layout_mode = 1
 anchors_preset = 2
 anchor_top = 1.0
 anchor_bottom = 1.0
-offset_left = 280.0
+offset_left = 282.0
 offset_top = -56.92627
-offset_right = 487.0
+offset_right = 500.0
 offset_bottom = -7.9262695
 grow_vertical = 0
 text = "Time: 00:00"
@@ -236,10 +315,10 @@ anchor_left = 0.28
 anchor_top = 0.5
 anchor_right = 0.28
 anchor_bottom = 0.5
-offset_left = -237.39948
-offset_top = -197.16046
-offset_right = 236.60051
-offset_bottom = 196.83954
+offset_left = -237.64748
+offset_top = -202.46313
+offset_right = 236.35252
+offset_bottom = 191.53687
 text = "Lorem ipsum dolor sit
 Lauren epsum solo shit
 Dougus dippus deltoid dump
@@ -259,7 +338,6 @@ offset_left = -175.79517
 offset_top = -175.67166
 offset_right = 175.20483
 offset_bottom = 175.32834
-texture = ExtResource("1_8ci6e")
 
 [node name="AcceptButton" type="Button" parent="Phone/BG/MissionDetail" unique_id=200810367]
 unique_name_in_owner = true
@@ -274,13 +352,19 @@ offset_top = -48.853912
 offset_right = 111.204834
 offset_bottom = 49.146088
 size_flags_vertical = 3
-theme_override_styles/hover = SubResource("StyleBoxFlat_o483p")
+theme_override_styles/normal = SubResource("StyleBoxFlat_8crxd")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_ternv")
+theme_override_styles/hover = SubResource("StyleBoxFlat_5o5h4")
 
 [node name="AcceptText" type="Label" parent="Phone/BG/MissionDetail/AcceptButton" unique_id=152769792]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_left = 2.7520142
+offset_top = -0.30267334
+offset_right = 2.7520142
+offset_bottom = -0.30267334
 grow_horizontal = 2
 grow_vertical = 2
 text = "ACCEPT"
@@ -294,10 +378,11 @@ unique_name_in_owner = true
 layout_mode = 1
 offset_left = 7.248001
 offset_top = 6.3026657
-offset_right = 65.496
-offset_bottom = 59.60533
+offset_right = 47.248
+offset_bottom = 46.302666
 size_flags_vertical = 3
 theme_override_styles/normal = SubResource("StyleBoxFlat_co1e6")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_aowqb")
 theme_override_styles/hover = SubResource("StyleBoxFlat_cott1")
 
 [node name="BackText" type="Label" parent="Phone/BG/MissionDetail/BackButton" unique_id=580515517]
@@ -305,6 +390,10 @@ layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_left = 1.7519989
+offset_top = 2.6973343
+offset_right = 1.7519989
+offset_bottom = 2.6973343
 grow_horizontal = 2
 grow_vertical = 2
 text = "X"
