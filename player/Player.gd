@@ -24,6 +24,8 @@ var _is_input_paused: bool
 @onready var camera = $Head/Camera3D
 @onready var footstep_player: AudioStreamPlayer3D = $FootstepPlayer
 
+
+
 func _ready():
 	add_to_group("player")
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
@@ -34,6 +36,7 @@ func _ready():
 	#Stop From Getting Stuck On Walls (slide along):	
 	max_slides = 6
 	safe_margin = 0.01
+	
 
 func _input(event):
 	if event is InputEventMouseMotion and not _is_input_paused:
@@ -41,16 +44,16 @@ func _input(event):
 		camera.rotate_x(-event.relative.y * SENSITIVITY)
 		camera.rotation.x = clamp(camera.rotation.x, deg_to_rad(-80), deg_to_rad(80))
 		
-	if debug:
+	#if debug:
 		# Uncapture the mouse when pressing the UI Cancel button (Default: Escape Key)
-		if event.is_action_pressed("ui_cancel"):
-			if Input.get_mouse_mode() == Input.MOUSE_MODE_CAPTURED:
-				Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+		#if event.is_action_pressed("ui_cancel"):
+			#if Input.get_mouse_mode() == Input.MOUSE_MODE_CAPTURED:
+				#Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 		
 		# Recapture the mouse when clicking back inside the game window
-		if event is InputEventMouseButton and event.pressed:
-			if Input.get_mouse_mode() == Input.MOUSE_MODE_VISIBLE:
-				Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+		#if event is InputEventMouseButton and event.pressed:
+			#if Input.get_mouse_mode() == Input.MOUSE_MODE_VISIBLE:
+				#Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 
 
 func _update_footsteps() -> void:

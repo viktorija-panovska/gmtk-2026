@@ -10,7 +10,6 @@ extends Node3D
 ]
 @onready var _phone: Phone = %Phone as Phone
 
-
 func _ready() -> void:
 	for spot in _graffiti_spots:
 		spot.setup(_phone)
